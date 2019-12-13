@@ -1,120 +1,2229 @@
----
-lang: en
-title: Your Code of Conduct
-description: Facilitate healthy and constructive community behavior by adopting and enforcing a code of conduct.
-class: coc
-toc:
-  why-do-i-need-a-code-of-conduct: "Why do I need a code of conduct?"
-  establishing-a-code-of-conduct: "Establishing a code of conduct"
-  deciding-how-youll-enforce-your-code-of-conduct: "Deciding how you’ll enforce your code of conduct"
-  enforcing-your-code-of-conduct: "Enforcing your code of conduct"
-  your-responsibilities-as-a-maintainer: "Your responsibilities as a maintainer"
-order: 8
-image: /assets/images/cards/coc.png
-related:
-  - building
-  - leadership
----
+ Automattic / jetpack
+Code Issues 1,289 Pull requests 153 Projects 12 Security Pulse Community
+Conversation	Commits	Changes
+Jump to bottom Open
+Sync: Add Async Sender #7482
+update/sync-async-sender
 
-## Why do I need a code of conduct?
+@lezama
+lezama opened this pull request over 2 years ago • edited 11 months ago
+Labels
 
-A code of conduct is a document that establishes expectations for behavior for your project's participants. Adopting, and enforcing, a code of conduct can help create a positive social atmosphere for your community.
+Sync [Status] In Progress [Type] Enhancement
+Add the option to load the Jetpack Sync Sender on another request as core does it for cron*. (hat tip @westi).
 
-Codes of conduct help protect not just your participants, but yourself. If you maintain a project, you may find that unproductive attitudes from other participants can make you feel drained or unhappy about your work over time.
+This feature is Off by default, and can be turned on via a jetpack_sync_settings_async_sender filter
 
-A code of conduct empowers you to facilitate healthy, constructive community behavior. Being proactive reduces the likelihood that you, or others, will become fatigued with your project, and helps you take action when someone does something you don't agree with.
+*We are avoiding just using spawn_cron as we already tried using it in the past, causing troubles with misconfigured cron setups.
 
-## Establishing a code of conduct
+How to test
 
-Try to establish a code of conduct as early as possible: ideally, when you first create your project.
+turn on the feature(off by default):
 
-In addition to communicating your expectations, a code of conduct describes the following:
+Use the sync settings endpoint to set async_sender to 1
+or
 
-* Where the code of conduct takes effect _(only on issues and pull requests, or community activities like events?)_
-* Whom the code of conduct applies to _(community members and maintainers, but what about sponsors?)_
-* What happens if someone violates the code of conduct
-* How someone can report violations
+Using a filter: add_filter('jetpack_sync_settings_async_sender', '__return_true');
 
-Wherever you can, use prior art. The [Contributor Covenant](https://contributor-covenant.org/) is a drop-in code of conduct that is used by over 40,000 open source projects, including Kubernetes, Rails, and Swift.
+on the ngrok console you should see a separate request to admin-ajax.php just for syncing
 
-The [Django Code of Conduct](https://www.djangoproject.com/conduct/) and the [Citizen Code of Conduct](http://citizencodeofconduct.org/) are also two good code of conduct examples.
+alternatively follow @enejb's instructions on #11146 and check that the original request doesn't get delayed
 
-Place a CODE_OF_CONDUCT file in your project's root directory, and make it visible to your community by linking it from your CONTRIBUTING or README file.
+lezama added the Sync label over 2 years ago
+lezama added the [Status] In Progress label over 2 years ago
+lezama added the [Team] Poseidon label over 2 years ago
+lezama self-assigned this over 2 years ago
+lezama requested a review from gravityrail over 2 years ago
+lezama requested a review from westi over 2 years ago
+lezama requested a review from ebinnion over 2 years ago
+lezama requested a review from roccotripaldi over 2 years ago
+@lezama	lezama reviewed over 2 years ago
+sync/class.jetpack-sync-actions.php
+allendav referenced this pull request from another issue
+#27 Disable Jetpack Sync during Shutdown for REST API Requests in woocommerce/wc-api-dev
+jeherve removed the [Team] Poseidon label about 2 years ago
+@enejb
+enejb
+commented over 1 year ago
+@lezama Do we still want to take this approach?
 
-## Deciding how you'll enforce your code of conduct
+@lezama
+lezama
+commented over 1 year ago
+what do you think about offering it as an alternative?
 
-<aside markdown="1" class="pquote">
-  A code of conduct that isn't (or can't be) enforced is worse than no code of conduct at all: it sends the message that the values in the code of conduct aren't actually important or respected in your community.
-  <p markdown="1" class="pquote-credit">
-— [Ada Initiative](https://adainitiative.org/2014/02/18/howto-design-a-code-of-conduct-for-your-community/)
-  </p>
-</aside>
+@enejb
+enejb
+commented over 1 year ago
+Sure should we put in as an option or a constant?
+maybe something we can change via the sync settings on a site
 
-You should explain how your code of conduct will be enforced **_before_** a violation occurs. There are several reasons to do so:
+@lezama
+lezama
+commented over 1 year ago
+maybe something we can change via the sync settings on a site
 
-* It demonstrates that you are serious about taking action when it's needed.
+👍
 
-* Your community will feel more reassured that complaints actually get reviewed.
+brbrr added the [Type] Enhancement label over 1 year ago
+@stale
+stale
+commented about 1 year ago
+This PR has been marked as stale. This happened because:
 
-* You'll reassure your community that the review process is fair and transparent, should they ever find themselves investigated for a violation.
+It has been inactive in the past 3 months.
+It hasn’t been labeled `[Pri] Blocker`, `[Pri] High`.
+No further action is needed. But it's worth checking if this PR has clear testing instructions, is it up to date with master, and it is still valid. Feel free to close this issue if you think it's not valid anymore — if you do, please add a brief explanation.
 
-You should give people a private way (such as an email address) to report a code of conduct violation and explain who receives that report. It could be a maintainer, a group of maintainers, or a code of conduct working group.
+stale[bot] added the [Status] Stale label about 1 year ago
+lezama added some commits over 2 years ago
+@lezama
+allow to load the sender async
+@lezama
+use `async_sender` Sync Setting
+lezama force pushed changes to this branch 11 months ago
+lezama requested a review from Jetpack Crew 11 months ago
+stale[bot] removed the [Status] Stale label 11 months ago
+stale[bot] removed the [Status] Stale label 11 months ago
+@jetpackbot
+jetpackbot commented 11 months ago • edited 11 months ago
+Warnings
+⚠️	"Testing instructions" are missing for this PR. Please add some
+⚠️	"Proposed changelog entry" is missing for this PR. Please include any meaningful changes
+This is automated check which relies on PULL_REQUEST_TEMPLATE.We encourage you to follow that template as it helps Jetpack maintainers do their job. If you think 'Testing instructions' or 'Proposed changelog entry' are not needed for your PR - please explain why you think so. Thanks for cooperation 🤖
 
-Don't forget that someone might want to report a violation about a person who receives those reports. In this case, give them an option to report violations to someone else. For example, @ctb and @mr-c [explain on their project](https://github.com/dib-lab/khmer/blob/master/CODE_OF_CONDUCT.rst), [khmer](https://github.com/dib-lab/khmer):
+Generated by 🚫 dangerJS against bb6c2b7
 
-> Instances of abusive, harassing, or otherwise unacceptable behavior may be reported by emailing **khmer-project@idyll.org** which only goes to C. Titus Brown and Michael R. Crusoe. To report an issue involving either of them please email **Judi Brown Clarke, Ph.D.** the Diversity Director at the BEACON Center for the Study of Evolution in Action, an NSF Center for Science and Technology.*
+@enejb
+enejb
+commented 11 months ago
+This works as expected for me.
 
-For inspiration, check out Django's [enforcement manual](https://www.djangoproject.com/conduct/enforcement-manual/) (though you may not need something this comprehensive, depending on the size of your project).
+To test this. I did the following.
 
-## Enforcing your code of conduct
+diff --git a/sync/class.jetpack-sync-sender.php b/sync/class.jetpack-sync-sender.php
+index 4a5b678e3..7f9a42f38 100644
+--- a/sync/class.jetpack-sync-sender.php
++++ b/sync/class.jetpack-sync-sender.php
+@@ -103,6 +103,8 @@ class Jetpack_Sync_Sender {
+        }
 
-Sometimes, despite your best efforts, somebody will do something that violates this code. There are several ways to address negative or harmful behavior when it comes up.
+        public function do_sync() {
++               l( 'do SYNC ', getmypid() );
++               sleep( 10 );
+                return $this->do_sync_and_set_delays( $this->sync_queue );
+        }
+Did an api call to the site.
+Noticed that the api call returned in 10 seconds.
 
-### Gather information about the situation
+And then enabled the async_sender option by setting it to true.
+via the sync manager on .com
 
-Treat each community member's voice as important as your own. If you receive a report that someone violated the code of conduct, take it seriously and investigate the matter, even if it does not match your own experience with that person. Doing so signals to your community that you value their perspective and trust their judgment.
+And notice that the error log still showed an do SYNC call.
+but the api response was much faster.
 
-The community member in question may be a repeat offender who consistently makes others feel uncomfortable, or they may have only said or done something once. Both can be grounds for taking action, depending on context.
+enejb referenced this pull request from commit d2018df 11 months ago
+enejb referenced this pull request from another pull request
+#11146 Sync: add fastcgi finish request to sync
+enejb referenced this pull request from commit 9390442 11 months ago
+lezama added the [Status] Needs Review label 11 months ago
+lezama removed the [Status] In Progress label 11 months ago
+lezama added this to the 7.0 milestone 11 months ago
+@enejb	enejb reviewed 11 months ago
+sync/class.jetpack-sync-actions.php
+@enejb	enejb reviewed 11 months ago
+sync/class.jetpack-sync-actions.php
+@enejb
+enejb
+commented 11 months ago
+@lezama can you review this again.
 
-Before you respond, give yourself time to understand what happened. Read through the person's past comments and conversations to better understand who they are and why they might have acted in such a way. Try to gather perspectives other than your own about this person and their behavior.
+@lezama	lezama reviewed 11 months ago
+sync/class.jetpack-sync-sender.php
+jeherve added the [Status] In Progress label 11 months ago
+jeherve removed the [Status] Needs Review label 11 months ago
+jeherve referenced this pull request from commit f899f22 11 months ago
+@enejb
+enejb commented 11 months ago • edited 11 months ago
+testing.php
+plugin to help us test this new feature.
 
-<aside markdown="1" class="pquote">
-  Don’t get pulled into an argument. Don’t get sidetracked into dealing with someone else’s behavior before you’ve finished dealing with the matter at hand. Focus on what you need.
-  <p markdown="1" class="pquote-credit">
-— Stephanie Zvan, ["So You've Got Yourself a Policy. Now What?"](https://the-orbit.net/almostdiamonds/2014/04/10/so-youve-got-yourself-a-policy-now-what/)
-  </p>
-</aside>
+<?php
+/*
+Plugin Name: Testing async syncing
+Version: 1.0
+*/
 
-### Take appropriate action
+add_filter( 'pre_option_jetpack_sync_settings_async_sender', '__return_true' );
+add_filter( 'jetpack_sync_send_data', 'eb_testing_send_data_sleep_before', 4, 1 );
+add_filter( 'jetpack_sync_send_data', 'eb_testing_send_data_sleep_after', 14, 1 );
 
-After gathering and processing sufficient information, you'll need to decide what to do. As you consider your next steps, remember that your goal as a moderator is to foster a safe, respectful, and collaborative environment. Consider not only how to deal with the situation in question, but how your response will affect the rest of your community's behavior and expectations moving forward.
+// fakes slow sync
+function eb_testing_send_data_sleep_before( $send ) {
+	error_log( 'Sleeping....' . getmypid() );
+	sleep( 10 );
+	return $send;
+}
 
-When somebody reports a code of conduct violation, it is your, not their, job to handle it. Sometimes, the reporter is disclosing information at great risk to their career, reputation, or physical safety. Forcing them to confront their harasser could put the reporter in a compromising position. You should handle direct communication with the person in question, unless the reporter explicitly requests otherwise.
+function eb_testing_send_data_sleep_after( $send ) {
+	error_log( 'Done Sending... '. getmypid() );
+	return $send;
+}
+@jeherve
+jeherve
+commented 11 months ago
+Is this ready for review?
 
-There are a few ways you might respond to a code of conduct violation:
+lezama removed this from the 7.0 milestone 11 months ago
+lezama added this to the 7.1 milestone 11 months ago
+jeherve removed this from the 7.1 milestone 10 months ago
+lezama force pushed changes to this branch 9 months ago
+@kraftbj
+kraftbj
+commented 8 months ago
+Just checking on the expected timeline for this? Are we hoping to land it soon or could close if we're not going to add it?
 
-* **Give the person in question a public warning** and explain how their behavior negatively impacted others, preferably in the channel where it occurred. Where possible, public communication conveys to the rest of the community that you take the code of conduct seriously. Be kind, but firm in your communication.
+@lezama
+lezama
+commented 8 months ago
+@enejb what do you think about this one?
 
-* **Privately reach out to the person** in question to explain how their behavior negatively impacted others. You may want to use a private communication channel if the situation involves sensitive personal information. If you communicate with someone privately, it's a good idea to CC those who first reported the situation, so they know you took action. Ask the reporting person for consent before CCing them.
+@lezama
+lezama
+commented 7 days ago
+came up with a snippet we can use inside a plugin:
 
-Sometimes, a resolution cannot be reached. The person in question may become aggressive or hostile when confronted or does not change their behavior. In this situation, you may want to consider taking stronger action. For example:
+if ( isset( $_POST['action'] ) && 'jetpack_sync_async_sender' === $_POST['action'] ) {
+	add_filter( 'jetpack_sync_sender_should_load', '__return_true' );
+	add_action( 'wp_ajax_nopriv_jetpack_sync_async_sender', '__return_true' );
+	ignore_user_abort( true );
+} else {
+	if ( ! ( defined( 'DOING_CRON' ) && DOING_CRON ) ) {
+		add_action( 'shutdown', function () {
+			if ( ! empty( \Automattic\Jetpack\Sync\Actions::get_sync_status()['queue_size'] ) ) {
+				$args = array(
+					'body'      => array(
+						'action' => 'jetpack_sync_async_sender',
+					),
+					'timeout'   => 0.01,
+					'blocking'  => false,
+					'sslverify' => apply_filters( 'https_local_ssl_verify', false )
+				);
+				wp_remote_post( admin_url( 'admin-ajax.php' ), $args );
+			}
+		}, 10000 );
+	}
+}```
+@broknowledge97
+broknowledge97
+commented 1 minute ago
+https://developer.github.com/ <title>GitHub API Changes</title> 2019-12-03T08:00:00Z hubot https://github.com/hubot tag:developer.github.com,2019-12-03:/changes/2019-12-03-internal-visibility-changes/ <title type="html">API changes to support internal repository visibility</title> 2019-12-03T08:00:00Z 2019-12-03T08:00:00Z <p>Customers with an enterprise account using GitHub Enterprise Cloud and GitHub Enterprise Server 2.20+ have access to a third visibility option beyond public and private, called <a href="https://help.github.com/en/github/creating-cloning-and-archiving-repositories/creating-an-internal-repository#about-internal-repositories">internal</a>. We've made some recent API changes to support this option.</p>
+<h3>
+<a id="repository-creation-policy" class="anchor" href="#repository-creation-policy" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Repository Creation Policy</h3>
 
-* **Suspend the person** in question from the project, enforced through a temporary ban on participating in any aspect of the project
+<p>The REST v3 and GraphQL v4 APIs now support setting and retrieving granular repository creation permissions.</p>
 
-* **Permanently ban** the person from the project
+<h4>
+<a id="rest-v3-api" class="anchor" href="#rest-v3-api" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>REST v3 API</h4>
 
-Banning members should not be taken lightly and represents a permanent and irreconcilable difference of perspectives. You should only take these measures when it is clear that a resolution cannot be reached.
+<p>In the REST v3 API, <a href="/v3/orgs/#get-an-organization">Get an organization</a>
+and <a href="/v3/orgs/#edit-an-organization">Edit an organization</a> endpoints have three
+new fields added to the existing <code>surtur</code> preview:</p>
 
-## Your responsibilities as a maintainer
+<ul>
+<li><code>members_can_create_public_repositories</code></li>
+<li><code>members_can_create_private_repositories</code></li>
+<li><code>members_can_create_internal_repositories</code></li>
+</ul>
 
-A code of conduct is not a law that is enforced arbitrarily. You are the enforcer of the code of conduct and it's your responsibility to follow the rules that the code of conduct establishes.
+<p>In <a href="/v3/orgs/#get-an-organization">Get an organization</a> and <a href="/v3/orgs/#edit-an-organization">Edit an organization</a>, the existing <code>members_allowed_repository_creation_type</code> field remains for backward compatibility but is deprecated and will be removed in the future. Its return value ignores internal repositories.</p>
 
-As a maintainer you establish the guidelines for your community and enforce those guidelines according to the rules set forth in your code of conduct. This means taking any report of a code of conduct violation seriously. The reporter is owed a thorough and fair review of their complaint. If you determine that the behavior that they reported is not a violation, communicate that clearly to them and explain why you're not going to take action on it. What they do with that is up to them: tolerate the behavior that they had an issue with, or stop participating in the community.
+<p>Values provided in the new fields while <a href="/v3/orgs/#edit-an-organization">editing an organization</a> override the existing <code>members_allowed_repository_creation_type</code> field.</p>
 
-A report of behavior that doesn't _technically_ violate the code of conduct may still indicate that there is a problem in your community, and you should investigate this potential problem and act accordingly. This may include revising your code of conduct to clarify acceptable behavior and/or talking to the person whose behavior was reported and telling them that while they did not violate the code of conduct, they are skirting the edge of what is expected and are making certain participants feel uncomfortable.
+<h4>
+<a id="graphl-v4-api" class="anchor" href="#graphl-v4-api" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>GraphL v4 API</h4>
 
-In the end, as a maintainer, you set and enforce the standards for acceptable behavior. You have the ability to shape the community values of the project, and participants expect you to enforce those values in a fair and even-handed way.
+<p>Similar changes apply to the GraphQL v4 API. The <a href="/v4/object/enterpriseownerinfo/"><code>EnterpriseOwnerInfo</code> object</a> has three new fields indicating the policy setting for Enterprise accounts:</p>
 
-## Encourage the behavior you want to see in the world 🌎
+<ul>
+<li><code>membersCanCreatePublicRepositoriesSetting</code></li>
+<li><code>membersCanCreatePrivateRepositoriesSetting</code></li>
+<li><code>membersCanCreateInternalRepositoriesSetting</code></li>
+</ul>
 
-When a project seems hostile or unwelcoming, even if it's just one person whose behavior is tolerated by others, you risk losing many more contributors, some of whom you may never even meet. It's not always easy to adopt or enforce a code of conduct, but fostering a welcoming environment will help your community grow.
+<p>These new fields coexist with the old <code>membersCanCreateRepositoriesSetting</code> which does not account for internal repository creation policy. This field is now deprecated and will be removed in the future.</p>
+
+<p>The <a href="/v4/input_object/updateenterprisememberscancreaterepositoriessettinginput/"><code>UpdateEnterpriseMembersCanCreateRepositoriesSetting</code> mutation</a> includes four new input fields:</p>
+
+<ul>
+<li>
+<code>membersCanCreateRepositoriesPolicyEnabled</code>, which toggles enterprise policy enforcement over organizations.</li>
+<li><code>membersCanCreatePublicRepositories</code></li>
+<li><code>membersCanCreatePrivateRepositories</code></li>
+<li><code>membersCanCreateInternalRepositories</code></li>
+</ul>
+
+<p>These new fields coexist with the old <code>settingValue</code> which does not account for internal repository creation policy. This field is also deprecated and will be removed in the future.</p>
+
+<h3>
+<a id="repository-visibility-fields" class="anchor" href="#repository-visibility-fields" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Repository Visibility Fields</h3>
+
+<p>You can now set and retrieve the visibility of a repository with a new field that accommodates <code>internal</code> repositories, which are available to enterprise accounts using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+. In the REST v3 API, you will see the following changes:</p>
+
+<p>These endpoints show <code>visibility</code> key in the response:</p>
+
+<ul>
+<li> <a href="/v3/repos/#list-your-repositories">List your repositories</a>
+</li>
+<li> <a href="/v3/repos/#list-user-repositories">List user repositories</a>
+</li>
+<li><a href="/v3/repos/#list-organization-repositories">List organization repositories</a></li>
+<li><a href="/v3/repos/#create">Create repository</a></li>
+<li><a href="/v3/repos/#create">Create repository using a repository template</a></li>
+<li><a href="/v3/repos/#get">Get a repository</a></li>
+<li><a href="/v3/repos/#edit">Edit repository</a></li>
+</ul>
+
+<p>These endpoints have new input parameters:</p>
+
+<ul>
+<li>
+<a href="/v3/repos/#create">Create repository</a> has a new <code>visibility</code> field which can be <code>public</code>, <code>private</code>, or <code>internal</code>. A value provided here overrides any value set in the existing <code>private</code> field.</li>
+<li>
+<a href="/v3/repos/#edit">Edit repository</a> also has a new <code>visibility</code> field with the same behavior as the Create endpoint.</li>
+<li>
+<a href="/v3/repos/#list-organization-repositories">List organization repositories</a> has a new <code>internal</code> input option for the <code>type</code> parameter.</li>
+</ul>
+
+<p>To access the <code>visibility</code> field for any of these endpoints, you must provide a custom media type in the Accept header:</p>
+
+<pre><code>application/vnd.github.nebula-preview+json
+</code></pre>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=API+changes+to+support+internal+repository+visibility"&gt;let us know</a>.</p>
+
+
+tag:developer.github.com,2019-11-12:/changes/2019-11-12-managing-enterprise-accounts/
+<title type="html">Introducing the "Managing enterprise accounts" GraphQL API</title>
+2019-11-12T08:00:00Z
+2019-11-12T08:00:00Z
+
+<p>Now you can manage your enterprise account using the GraphQL API, which efficiently returns just the data you request. This API is designed to handle all of your enterprise account management needs, from monitoring account settings, access changes, and users within your enterprise. The Managing Enterprise Accounts API is available for GitHub Enterprise Cloud and for GitHub Enterprise Server.</p>
+
+<p>For more information, see "<a href="/v4/guides/managing-enterprise-accounts">Managing enterprise accounts</a>."</p>
+
+
+tag:developer.github.com,2019-11-05:/changes/2019-11-05-deprecated-passwords-and-authorizations-api/
+<title type="html">Deprecated APIs and authentication</title>
+2019-11-05T08:00:00Z
+2019-11-05T08:00:00Z
+
+<p>We are announcing deprecations that will improve the security of GitHub apps and APIs. We will provide more information during the following few months, including the exact timeline for discontinuing the support of these deprecations.</p>
+
+<h3>
+<a id="authenticating-using-passwords" class="anchor" href="#authenticating-using-passwords" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Authenticating using passwords</h3>
+
+<p>GitHub is deprecating password authentication to the API. Instead of using password authentication, create a personal access token using your <a href="https://help.github.com/articles/creating-an-access-token-for-command-line-use"&gt;Personal access tokens settings page</a> in limited situations like testing. You should authenticate apps in production by using the web applications flow. For more information, see "<a href="/apps/building-oauth-apps/authorizing-oauth-apps/">Authorizing OAuth Apps</a>."</p>
+
+<h3>
+<a id="authenticating-using-query-parameters" class="anchor" href="#authenticating-using-query-parameters" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Authenticating using query parameters</h3>
+
+<p>GitHub is deprecating authentication to the GitHub API using query parameters, such as using a <code>token</code> query parameter for OAuth user authentication or a <code>client_id</code>/<code>client_secret</code> query parameter for OAuth application authentication.
+All authentication to the GitHub API should be done using <a href="/v3/auth/#via-oauth-and-personal-access-tokens">HTTP basic authentication</a>.</p>
+
+<h3>
+<a id="authenticating-with-saml-organizations" class="anchor" href="#authenticating-with-saml-organizations" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Authenticating with SAML organizations</h3>
+
+<p>Apps must use the <a href="/apps/building-oauth-apps/authorizing-oauth-apps/#web-application-flow">web application flow</a> to obtain OAuth tokens that work with GitHub SAML organizations. OAuth tokens created using the <a href="/v3/oauth_authorizations">Authorizations API</a> are unable to access resources for GitHub SAML organizations.</p>
+
+<h3>
+<a id="deprecating-and-adding-endpoints-for-the-oauth-authorizations-and-oauth-applications-apis" class="anchor" href="#deprecating-and-adding-endpoints-for-the-oauth-authorizations-and-oauth-applications-apis" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Deprecating and adding endpoints for the OAuth Authorizations and OAuth Applications APIs</h3>
+
+<p>GitHub is deprecating the <a href="/v3/oauth_authorizations">Authorizations API</a>, which includes these endpoints:</p>
+
+<ul>
+<li><a href="/v3/oauth_authorizations/#list-your-authorizations"><code>GET /authorizations</code></a></li>
+<li><a href="/v3/oauth_authorizations/#get-a-single-authorization"><code>GET /authorizations/:authorization_id</code></a></li>
+<li><a href="/v3/oauth_authorizations/#create-a-new-authorization"><code>POST /authorizations</code></a></li>
+<li><a href="/v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app"><code>PUT /authorizations/clients/:client_id</code></a></li>
+<li><a href="/v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app-and-fingerprint"><code>PUT /authorizations/clients/:client_id/:fingerprint</code></a></li>
+<li><a href="/v3/oauth_authorizations/#update-an-existing-authorization"><code>PATCH /authorizations/:authorization_id</code></a></li>
+<li><a href="/v3/oauth_authorizations/#delete-an-authorization"><code>DELETE /authorizations/:authorization_id</code></a></li>
+<li><a href="/v3/oauth_authorizations/#list-your-grants"><code>GET /applications/grants</code></a></li>
+<li><a href="/v3//oauth_authorizations/#get-a-single-grant"><code>GET /applications/grants/:grant_id</code></a></li>
+<li><a href="/v3/oauth_authorizations/#delete-a-grant"><code>DELETE /applications/grants/:grant_id</code></a></li>
+</ul>
+
+<p>Some client-side integrations use the deprecated Authorizations API to create personal access tokens and OAuth access tokens. These tokens must now be created using our <a href="/apps/building-oauth-apps/authorizing-oauth-apps/#web-application-flow">web application flow</a>. When appropriate, personal access tokens can still be created by the user on the <a href="https://github.com/settings/tokens"&gt;Personal access tokens</a> page. However, most integrations should <a href="https://github.com/settings/applications/new"&gt;register themselves</a> as an OAuth application and use the web application flow to obtain an OAuth access token.</p>
+
+<p>GitHub has replaced several deprecated endpoints with new ones. You can now find both the deprecated and new endpoints in the <a href="/v3/apps/oauth_applications">OAuth Applications API</a>. Specifically, we have deprecated OAuth Applications API endpoints containing an OAuth token as a path parameter:</p>
+
+<ul>
+<li><a href="/v3/apps/oauth_applications/#check-an-authorization"><code>GET /applications/:client_id/tokens/:access_token</code></a></li>
+<li><a href="/v3/apps/oauth_applications/#reset-an-authorization"><code>POST /applications/:client_id/tokens/:access_token</code></a></li>
+<li><a href="/v3/apps/oauth_applications/#revoke-an-authorization-for-an-application"><code>DELETE /applications/:client_id/tokens/:access_token</code></a></li>
+<li><a href="/v3/apps/oauth_applications/#revoke-a-grant-for-an-application"><code>DELETE /applications/:client_id/grants/:access_token</code></a></li>
+</ul>
+
+<p>These new endpoints replace the deprecated endpoints:</p>
+
+<ul>
+<li><a href="/v3/apps/oauth_applications/#check-a-token"><code>POST /applications/:client_id/token</code></a></li>
+<li><a href="/v3/apps/oauth_applications/#reset-a-token"><code>PATCH /applications/:client_id/token</code></a></li>
+<li><a href="/v3/apps/oauth_applications/#delete-an-app-token"><code>DELETE /applications/:client_id/token</code></a></li>
+<li><a href="/v3/apps/oauth_applications/#delete-an-app-authorization"><code>DELETE /applications/:client_id/grant</code></a></li>
+</ul>
+
+<h3>
+<a id="updating-command-line-utilities-to-use-localhost-based-redirect-urls" class="anchor" href="#updating-command-line-utilities-to-use-localhost-based-redirect-urls" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Updating command-line utilities to use localhost-based redirect URLs</h3>
+
+<p>Command-line tools now support a web-based flow by using localhost-based redirect URLs and specifying a port. We have extended our support for localhost-based redirect URLs to securely improve the experience of command-line utilities for client-side integrations. Historically these tools have relied on the Authorizations API, and they have not been able to easily register an OAuth URL callback to use with our OAuth <a href="/apps/building-oauth-apps/authorizing-oauth-apps/#web-application-flow">web application flow</a>. Please see our documentation on <a href="/apps/building-oauth-apps/authorizing-oauth-apps/#localhost-redirect-urls">redirect URLs</a> for more information.</p>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Deprecated+passwords+and+authorizations+api"&gt;let us know</a>!</p>
+
+
+tag:developer.github.com,2019-10-23:/changes/2019-10-23-get-installations-for-org/
+<title type="html">List GitHub App installations for an organization</title>
+2019-10-23T07:00:00Z
+2019-10-23T07:00:00Z
+
+<p>Now as an organization owner, you can <a href="/v3/orgs/#list-installations-for-an-organization">list all GitHub App installations</a> for an organization using the REST API. You must be an organization owner with <code>admin:read</code> scope to use this endpoint. The installation count includes all GitHub Apps installed on repositories in the organization.</p>
+
+<pre><code>GET /orgs/:org/installations
+</code></pre>
+
+<p>To list all GitHub App installations for an organization, you must provide the <code>machine-man</code> custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:</p>
+
+<pre><code>application/vnd.github.machine-man-preview+json
+</code></pre>
+
+<p>During the preview period, we may change aspects of these APIs based on developer feedback.</p>
+
+<p>If we do, we will announce the changes here on the developer blog, but we will not provide any advance notice. If you have any questions or feedback, <a href="https://github.com/contact?form%5Bsubject%5D=Feedback:+Listing+GitHub+App+installations+for+an+organization+via+the+API"&gt;let us know</a>.</p>
+
+
+tag:developer.github.com,2019-10-04:/changes/2019-10-04-end-mister-fantastic-preview/
+<title type="html">GitHub Pages features become an official part of the REST API</title>
+2019-10-04T07:00:00Z
+2019-10-04T07:00:00Z
+
+<p>The features that are a part of the GitHub Pages <code>mister-fantastic-preview</code> are now available on GitHub.com and will be available in the next versions of GitHub Enterprise (2.19 and higher). You will no longer need to pass a preview header to use most GitHub Pages API endpoints.</p>
+
+<h3>
+<a id="preview-media-type-no-longer-needed" class="anchor" href="#preview-media-type-no-longer-needed" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Preview media type no longer needed</h3>
+
+<p>Now that the preview period has ended (first announced in <a href="/changes/2016-07-06-github-pages-preview-api/">July 2016</a>), you no longer need to pass the <code>mister-fantastic-preview</code> custom media type. Instead, we recommend that you specify v3 as the version in the Accept header:</p>
+
+<pre><code>application/vnd.github.v3+json
+</code></pre>
+
+<p>Please note that if you use GitHub Enterprise versions 2.8 to 2.18, you will still need to provide this custom media type in the Accept header:</p>
+
+<pre><code>application/vnd.github.mister-fantastic-preview+json
+</code></pre>
+
+<p><strong><em>Onward!</em></strong>
+Thanks again to everyone that tried out these GitHub Pages API features during the preview period.</p>
+
+
+tag:developer.github.com,2019-10-03:/changes/2019-10-03-multi-line-comments/
+<title type="html">Multi-line comments</title>
+2019-10-03T07:00:00Z
+2019-10-03T07:00:00Z
+
+<p>Now you can create comments across multiple lines of code in a pull request diff using REST API or GraphQL.</p>
+
+<p>To create multi-line comments or see multi-line comments with the new supported fields when you fetch comment responses, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:</p>
+
+<pre><code>application/vnd.github.comfort-fade-preview+json
+</code></pre>
+
+<p>During the preview period, we may change aspects of these APIs based on developer feedback.</p>
+
+<p>If we do, we will announce the changes here on the developer blog, but we will not provide any advance notice. If you have any questions or feedback, <a href="https://github.com/contact?form%5Bsubject%5D=Feedback%3A+API+support+for+Multi-line+comments"&gt;please let us know</a>.</p>
+
+
+tag:developer.github.com,2019-09-24:/changes/2019-09-24-team-sychronization-end-preview/
+<title type="html">Team sychronization become an official part of REST API</title>
+2019-09-24T07:00:00Z
+2019-09-24T07:00:00Z
+
+<p>The features that are a part of the team sychronization <code>team-sync-preview</code> are now available on GitHub.com. Going forward, the Team synchronization API endpoints will be available without a preview header.</p>
+
+<h3>
+<a id="preview-media-type-no-longer-needed" class="anchor" href="#preview-media-type-no-longer-needed" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Preview media type no longer needed</h3>
+
+<p>Now that the preview period has ended (first announced in <a href="/changes/2019-06-12-team-sync/">June 2019</a>), you no longer need to pass the <code>team-sync-preview</code> custom media type.</p>
+
+
+tag:developer.github.com,2019-09-06:/changes/2019-09-06-more-check-annotations-shown-in-files-changed-tab/
+<title type="html">More check annotations are now shown on the "Files changed" tab</title>
+2019-09-06T07:00:00Z
+2019-09-06T07:00:00Z
+
+<p>In May of 2018, we <a href="/changes/2018-05-07-new-checks-api-public-beta/">announced the Checks API</a>, which added many new capabilities for running checks on code. One of those new capabilities were check annotations, which let apps annotate specific lines of code as part of a check run.</p>
+
+<p><img src="https://user-images.githubusercontent.com/7718702/60444186-9d121e00-9c14-11e9-9c51-d62791d5d317.png" alt="demo-screenshot-of-unchanged-files-with-check-annotations"></p>
+
+<p>Check annotations point directly to those lines where a test failure or a lint error occurred, and they empower users to fix any kind of errors or warnings quickly so they can move forward with their pull requests.</p>
+
+<p><img src="/assets/images/checks/checks_annotation.png" alt="demo-screenshot-from-checks-api-blog-post"></p>
+
+<p>Today we're making check annotations even more powerful by bringing more of them to where you're already looking: the "Files changed" tab. Checks annotations created on lines or files that were <strong>not</strong> modified as part of a pull request will now be prominently displayed alongside the diff.</p>
+
+<p>Internal testing has proven that surfacing unchanged files with check annotations has been especially beneficial to our workflows, because test failures can often happen on files that weren't modified as part of a pull request.</p>
+
+<p><a href="https://github.com/wilhelmklopp/failing-test-annotation/pull/2/files"&gt;Click here to see it in action!</a></p>
+
+<p>The best part? The <a href="/v3/checks/runs/#annotations-object">API for creating check annotations</a> has not changed. If you're already creating annotations on files or lines outside of the diff, then there's no need to modify any code to use this improvement.</p>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Feedback:+More+check+annotations+are+now+shown+on+the+Files+changed+tab"&gt;let us know.</a></p>
+
+
+tag:developer.github.com,2019-09-05:/changes/2019-09-05-apps-protected-branches-api/
+<title type="html">Grant GitHub Apps push access to protected branches</title>
+2019-09-05T07:00:00Z
+2019-09-05T07:00:00Z
+
+<p>The <a href="/v3/repos/branches/">Protected Branches API</a> now allows you to grant GitHub Apps push access to protected branches.</p>
+
+<p>You can only grant GitHub Apps push access to a protected branch if they have been installed with the repository contents <code>write</code> permission.</p>
+
+<p>The Protected Branches API now includes the following endpoints:</p>
+
+<ul>
+<li><a href="/v3/repos/branches/#list-apps-with-access-to-protected-branch"><code>GET /repos/:owner/:repo/branches/:branch/protection/restrictions/apps</code></a></li>
+<li><a href="/v3/repos/branches/#replace-app-restrictions-of-protected-branch"><code>PUT /repos/:owner/:repo/branches/:branch/protection/restrictions/apps</code></a></li>
+<li><a href="/v3/repos/branches/#add-app-restrictions-of-protected-branch"><code>POST /repos/:owner/:repo/branches/:branch/protection/restrictions/apps</code></a></li>
+<li><a href="/v3/repos/branches/#remove-app-restrictions-of-protected-branch"><code>DELETE /repos/:owner/:repo/branches/:branch/protection/restrictions/apps</code></a></li>
+</ul>
+
+<p>The existing endpoint to set branch protection now accepts app restrictions:</p>
+
+<ul>
+<li><a href="/v3/repos/branches/#update-branch-protection"><code>PUT /repos/:owner/:repo/branches/:branch/protection</code></a></li>
+</ul>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Apps+Protected+Branchess"&gt;get in touch</a>!</p>
+
+
+tag:developer.github.com,2019-07-16:/changes/2019-07-16-repository-templates-api/
+<title type="html">Create and use repository templates</title>
+2019-07-16T07:00:00Z
+2019-07-16T07:00:00Z
+
+<p>Repository templates enable you to create a new repository using an existing one that is marked <code>is_template</code>. This only copies repository contents without copying the commit history.</p>
+
+<p>To access the new API, you must provide a custom media type in the Accept header:</p>
+
+<pre><code>application/vnd.github.baptiste-preview+json
+</code></pre>
+
+<p>The following new endpoint is available for you to generate a new repository from a template repository:</p>
+
+<ul>
+<li><a href="/v3/repos/#create-repository-using-a-repository-template"><code>POST /repos/:owner/:repo/generate</code></a></li>
+</ul>
+
+<p>In addition, you can make your repository available as a template when you <a href="/v3/repos/#create">Create</a> or <a href="/v3/repos/#edit">Edit</a> the repository. You can also <a href="/v3/repos/#get">GET</a> a repository's information to see if the repository is available to use as a template (<code>is_template</code> key is <code>true</code>) or was generated from a <code>template_repository</code>. For more information, see the <a href="/v3/repos/">Repositories API</a>.</p>
+
+<p>During the preview period, we may change aspects of these APIs based on developer feedback.
+If we do, we will announce the changes here on the developer blog, but we will not provide any advance notice.</p>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=baptiste+preview"&gt;let us know</a>!</p>
+
+
+tag:developer.github.com,2019-06-12:/changes/2019-06-12-team-sync/
+<title type="html">Connect GitHub teams and IdP groups</title>
+2019-06-12T07:00:00Z
+2019-06-12T07:00:00Z
+
+<div class="alert product"><p>
+
+Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see <a href="https://help.github.com/articles/github-s-products"&gt;GitHub's products</a> in the GitHub Help documentation.
+
+</p></div>
+
+<p>The <a href="/v3/teams/team_sync/">Team Synchronization API</a> allows you to manage connections between GitHub teams and external identity provider (IdP) groups.</p>
+
+<p>You can manage GitHub team members through your IdP with team synchronization. Team synchronization must be enabled to use the Team Synchronization API. For more information, see "<a href="https://help.github.com/articles/synchronizing-teams-between-your-identity-provider-and-github/"&gt;Synchronizing teams between your identity provider and GitHub</a>" in the GitHub Help documentation.</p>
+
+<p>To access the new API, you will need to <a href="https://help.github.com/en/articles/authorizing-a-personal-access-token-for-use-with-a-saml-single-sign-on-organization"&gt;authorize your API token</a> for use with your IdP (SSO) provider. You must also provide a custom media type in the Accept header:</p>
+
+<pre><code>application/vnd.github.team-sync-preview+json
+</code></pre>
+
+<p>The following endpoints in the <a href="/v3/teams/team_sync/">Team Synchronization API</a> are available for you to use:</p>
+
+<ul>
+<li><code>GET /orgs/:org/team-sync/groups</code></li>
+<li><code>GET /teams/:team_id/team-sync/group-mappings</code></li>
+<li><code>PATCH /teams/:team_id/team-sync/group-mappings</code></li>
+</ul>
+
+<p>During the preview period, we may change aspects of these APIs based on developer feedback.
+If we do, we will announce the changes here on the developer blog, but we will not provide any advance notice.</p>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=team+sync+preview"&gt;let us know</a>!</p>
+
+
+tag:developer.github.com,2019-06-04:/changes/2019-06-04-automated-security-fixes/
+<title type="html">Enable or disable automated security fixes for a repository</title>
+2019-06-04T07:00:00Z
+2019-06-04T07:00:00Z
+
+<p>Previously, you could only enable or disable automated security fixes from a repository's security alerts page. We understand that having to do this for a large amount of repositories is not an optimal user experience. We've heard your feedback and are pleased to announce that we have released a new set of endpoints to manage the automated security fixes setting for your repositories.</p>
+
+<p>To access the new endpoints, you must provide a custom media type in the Accept header:</p>
+
+<pre><code>application/vnd.github.london-preview+json
+</code></pre>
+
+<p>The first endpoint allows you to <a href="/v3/repos/#enable-automated-security-fixes">enable</a> the automated security fixes setting:</p>
+
+<pre><code>PUT /repos/:owner/:repo/automated-security-fixes
+</code></pre>
+
+<p>The second endpoint allows you to <a href="/v3/repos/#disable-automated-security-fixes">disable</a> the automated security fixes setting:</p>
+
+<pre><code>DELETE /repos/:owner/:repo/automated-security-fixes
+</code></pre>
+
+<p>During the preview period, we may change aspects of these APIs based on developer feedback.
+If we do, we will announce the changes here on the developer blog, but we will not provide any advance notice.</p>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=london+preview"&gt;let us know</a>!</p>
+
+
+tag:developer.github.com,2019-05-29:/changes/2019-05-29-update-branch-api/
+<title type="html">Perform an "Update branch" on a pull request via the REST API</title>
+2019-05-29T07:00:00Z
+2019-05-29T07:00:00Z
+
+<p>We are pleased to announce a new API for updating the branch on a pull request, the <strong>Update Branch API</strong>. Rather than having to manually click a button to update the HEAD of a pull request branch with the latest changes from the base branch, you can now do so with one REST API endpoint call.</p>
+
+<p>Why not just use the <a href="/v3/repos/merging/#perform-a-merge">Merging API</a>? Good question, and of course you can! The advantage of using this new API is that you only need the pull request number, not the <code>base</code> or <code>head</code>. This could potentially save a few roundtrips to the API and reduce the risk of getting rate limited.</p>
+
+<p>To access the new endpoints, you must provide a custom media type in the Accept header:</p>
+
+<pre><code>application/vnd.github.lydian-preview+json
+</code></pre>
+
+<p>The <a href="/v3/pulls/#update-a-pull-request-branch">update a pull request branch</a> endpoint allows you to update the HEAD of the pull request branch for a pull request.</p>
+
+<pre><code>PUT /repos/:owner/:repo/pulls/:pull_number/update-branch
+</code></pre>
+
+<p>During the preview period, we may change aspects of these APIs based on developer feedback.
+If we do, we will announce the changes here on the developer blog, but we will not provide any advance notice.</p>
+
+<p>Feedback <a href="https://github.com/contact?form%5Bsubject%5D=lydian+preview"&gt;welcomed&lt;/a&gt;!&lt;/p>
+
+
+tag:developer.github.com,2019-04-24:/changes/2019-04-24-vulnerability-alerts/
+<title type="html">Enable or disable vulnerability alerts for a repository</title>
+2019-04-24T07:00:00Z
+2019-04-24T07:00:00Z
+
+<p>Previously, you could only enable or disable repository vulnerability alerts by checking a box in a repository's settings. We understand that having to do this for a large amount of repositories is not an optimal user experience. We've heard your feedback and are pleased to announce that we have released a new set of endpoints to manage the vulnerability alerts setting for your repositories.</p>
+
+<p>To access the new endpoints, you must provide a custom media type in the Accept header:</p>
+
+<pre><code>application/vnd.github.dorian-preview+json
+</code></pre>
+
+<p>The first endpoint allows you to <a href="/v3/repos/#enable-vulnerability-alerts">enable</a> the vulnerability alerts setting:</p>
+
+<pre><code>PUT /repos/:owner/:repo/vulnerability-alerts
+</code></pre>
+
+<p>And the second endpoint allows you to <a href="/v3/repos/#disable-vulnerability-alerts">disable</a> the vulnerability alerts setting:</p>
+
+<pre><code>DELETE /repos/:owner/:repo/vulnerability-alerts
+</code></pre>
+
+<p>During the preview period, we may change aspects of these APIs based on developer feedback.
+If we do, we will announce the changes here on the developer blog, but we will not provide any advance notice.</p>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=dorian+preview"&gt;let us know</a>!</p>
+
+<p><strong><em>[Updated 06-10-19]</em></strong> You can also <a href="/v3/repos/#check-if-vulnerability-alerts-are-enabled-for-a-repository">check whether repository alerts are enabled or disabled</a> for a repository using a new endpoint.</p>
+
+<pre><code> GET /repos/:owner/:repo/vulnerability-alerts
+</code></pre>
+
+
+tag:developer.github.com,2019-04-18:/changes/2019-04-18-new-webhook-events-and-actions/
+<title type="html">New webhook events and actions</title>
+2019-04-18T07:00:00Z
+2019-04-18T07:00:00Z
+
+<p>Our webhooks team is pleased to announce that we have added some long-awaited webhook events and actions to the list that we support and they will be available today. You'll automatically begin receiving these events if you have a webhook that is subscribed to <a href="/webhooks/#wildcard-event">wildcard</a> events, otherwise you will be able to select the new events from the list in your webhook settings. As always, we continue to <a href="/changes/2016-03-15-new-webhook-actions/#how-to-work-with-new-event-actions">recommend listening for the actions</a> in order to future-proof your code.</p>
+
+<p>Here are the new events and actions that we've added:</p>
+
+<table>
+<thead>
+<tr>
+<th>Event</th>
+<th>Action</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/v3/activity/events/types#deploykeyevent"><code>DeployKeyEvent</code></a></td>
+<td><code>created</code></td>
+<td>Triggered when a deploy key is added to a repository.</td>
+</tr>
+<tr>
+<td><a href="/v3/activity/events/types#deploykeyevent"><code>DeployKeyEvent</code></a></td>
+<td><code>deleted</code></td>
+<td>Triggered when a deploy key is removed from a repository.</td>
+</tr>
+<tr>
+<td><a href="/v3/activity/events/types#issuesevent"><code>IssueEvent</code></a></td>
+<td><code>locked</code></td>
+<td>Triggered when an issue is locked.</td>
+</tr>
+<tr>
+<td><a href="/v3/activity/events/types#issuesevent"><code>IssueEvent</code></a></td>
+<td><code>unlocked</code></td>
+<td>Triggered when an issue is unlocked.</td>
+</tr>
+<tr>
+<td><a href="/v3/activity/events/types#metaevent"><code>MetaEvent</code></a></td>
+<td><code>deleted</code></td>
+<td>Triggered when the hook itself is deleted.</td>
+</tr>
+<tr>
+<td><a href="/v3/activity/events/types#organizationevent"><code>OrganizationEvent</code></a></td>
+<td><code>renamed</code></td>
+<td>Triggered when the organization is renamed.</td>
+</tr>
+<tr>
+<td><a href="/v3/activity/events/types#organizationevent"><code>OrganizationEvent</code></a></td>
+<td><code>deleted</code></td>
+<td>Triggered when the organization is deleted.</td>
+</tr>
+<tr>
+<td><a href="/v3/activity/events/types#pullrequestevent"><code>PullRequestEvent</code></a></td>
+<td><code>locked</code></td>
+<td>Triggered when a pull request is locked.</td>
+</tr>
+<tr>
+<td><a href="/v3/activity/events/types#pullrequestevent"><code>PullRequestEvent</code></a></td>
+<td><code>unlocked</code></td>
+<td>Triggered when a pull request is unlocked.</td>
+</tr>
+<tr>
+<td><a href="/v3/activity/events/types#releaseevent"><code>ReleaseEvent</code></a></td>
+<td><code>created</code></td>
+<td>Triggered when a release is created.</td>
+</tr>
+<tr>
+<td><a href="/v3/activity/events/types#releaseevent"><code>ReleaseEvent</code></a></td>
+<td><code>edited</code></td>
+<td>Triggered when a release is edited.</td>
+</tr>
+<tr>
+<td><a href="/v3/activity/events/types#releaseevent"><code>ReleaseEvent</code></a></td>
+<td><code>deleted</code></td>
+<td>Triggered when a release is deleted.</td>
+</tr>
+<tr>
+<td><a href="/v3/activity/events/types#releaseevent"><code>ReleaseEvent</code></a></td>
+<td><code>prereleased</code></td>
+<td>Triggered when a release is prereleased.</td>
+</tr>
+<tr>
+<td><a href="/v3/activity/events/types#releaseevent"><code>ReleaseEvent</code></a></td>
+<td><code>unpublished</code></td>
+<td>Triggered when a release is unpublished.</td>
+</tr>
+<tr>
+<td><a href="/v3/activity/events/types#repositoryevent"><code>RepositoryEvent</code></a></td>
+<td><code>edited</code></td>
+<td>Triggered when attributes on a repository (e.g. description, default branch, homepage) are changed.</td>
+</tr>
+<tr>
+<td><a href="/v3/activity/events/types#repositoryevent"><code>RepositoryEvent</code></a></td>
+<td><code>renamed</code></td>
+<td>Triggered when a repository is renamed.</td>
+</tr>
+<tr>
+<td><a href="/v3/activity/events/types#repositoryevent"><code>RepositoryEvent</code></a></td>
+<td><code>transferred</code></td>
+<td>Triggered when a repository is transferred to a new owner.</td>
+</tr>
+<tr>
+<td><a href="/v3/activity/events/types#starevent"><code>StarEvent</code></a></td>
+<td><code>created</code></td>
+<td>Triggered when a star is added to a repository.</td>
+</tr>
+<tr>
+<td><a href="/v3/activity/events/types#starevent"><code>StarEvent</code></a></td>
+<td><code>deleted</code></td>
+<td>Triggered when a star is removed from a repository.</td>
+</tr>
+</tbody>
+</table>
+
+<p>Please visit our <a href="/webhooks">webhooks documentation</a> to view all of the events and actions that we support, and to get more information on these new ones.</p>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=New+Webhook+Events"&gt;get in touch</a>!</p>
+
+
+tag:developer.github.com,2019-04-11:/changes/2019-04-11-pulls-branches-for-commit/
+<title type="html">List branches or pull requests for a commit (preview)</title>
+2019-04-11T07:00:00Z
+2019-04-11T07:00:00Z
+
+<p>We're releasing a couple of REST endpoints that enable you to retrieve additional information from an existing commit.</p>
+
+<p>To access the new endpoints you must provide a custom media type in the Accept header:</p>
+
+<pre><code>application/vnd.github.groot-preview+json
+</code></pre>
+
+<p>The first endpoint allows you to <a href="/v3/repos/commits/#list-branches-for-head-commit">get the list of branches</a> where the given commit is the <code>HEAD</code>:</p>
+
+<pre><code>GET /repos/:owner/:repo/commits/:commit_sha/branches-where-head
+</code></pre>
+
+<p>The second one enables you to <a href="/v3/repos/commits/#list-pull-requests-associated-with-commit">get a list of pull requests</a> associated with the commit:</p>
+
+<pre><code>GET /repos/:owner/:repo/commits/:commit_sha/pulls
+</code></pre>
+
+<p>During the preview period, we may change aspects of these APIs based on developer feedback.
+If we do, we will announce the changes here on the developer blog, but we will not provide any advance notice.</p>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Groot+preview"&gt;let us know</a>!</p>
+
+
+tag:developer.github.com,2019-03-29:/changes/2019-03-29-webhooks-ip-changes/
+<title type="html">Webhook IP addresses are changing</title>
+2019-03-29T07:00:00Z
+2019-03-29T07:00:00Z
+
+<p>On April 9th, GitHub will begin sending webhooks from the <code>140.82.112.0/20</code> range of IP addresses in addition to the older <code>192.30.252.0/22</code> range.</p>
+
+<p>We use a large pool of IP's to reach our customers, and we are adding further netblocks to help serve webhooks more reliably. If you have rules in place that only allow GitHub webhooks from our trusted addresses, you will need to update them.</p>
+
+<p>This block of IPs has been in the <a href="https://help.github.com/en/articles/about-githubs-ip-addresses"&gt;/meta&lt;/a> API endpoint since May 2018, but we wanted to announce this update in case you missed it.</p>
+
+<p>Please <a href="https://github.com/contact?form%5Bsubject%5D=Webhooks+IPs+Are+Changing"&gt;contact us</a> if you have any questions.</p>
+
+
+tag:developer.github.com,2019-03-26:/changes/2019-03-26-new-response-code-for-notifications-marked-as-read-in-bulk/
+<title type="html">New response code for notifications marked as "read" in bulk</title>
+2019-03-26T07:00:00Z
+2019-03-26T07:00:00Z
+
+<p>You can use the <a href="/v3/activity/notifications/#mark-as-read"><code>/PUT notifications</code></a> endpoint to mark all notifcations as "read." Similarly, you can use the <a href="/v3/activity/notifications/#mark-notifications-as-read-in-a-repository"><code>PUT /repos/:owner/:repo/notifications</code></a> endpoint to mark all notifications as "read" for a specific repository.</p>
+
+<p>Sometimes, GitHub would time out and return an error when there were too many unread notifications to process in a single request. We've changed both endpoints to trigger a background job that will mark the notifications as "read" asynchronously. If the operation is too expensive for a single request, the endpoint returns a <code>202</code> status code with the following response:</p>
+
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+</span><span class="nt">"message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Unread notifications couldn't be marked in a single request. Notifications are being marked as read in the background."</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>After analyzing recent request data and we expect very few requests to trigger a background job. Most requests should return a <code>205</code> status code as usual. If you do receive a <code>202</code> status code, it will take a short amount of time for all notifications to be marked as "read" in the background job. There is currently no way to check if the job has completed. Instead, we recommend checking the number of unread notifications in separate requests using one of these endpoints:</p>
+
+<pre><code>GET https://api.github.com/notifications?all=false
+</code></pre>
+
+<p>or</p>
+
+<pre><code>GET https://api.github.com/repos/:owner/:repo/notifications?all=false
+</code></pre>
+
+
+tag:developer.github.com,2019-03-14:/changes/2019-03-14-enabling-disabling-pages/
+<title type="html">Preview enable and disable Pages API endpoints</title>
+2019-03-14T07:00:00Z
+2019-03-14T07:00:00Z
+
+<p>We're releasing a new Pages API preview that allows you to enable and disable GitHub Pages from the REST v3 API. These add to our existing Pages APIs which allow you to access &amp; update Pages configuration as well as access &amp; create new builds.</p>
+
+<p>To access the <a href="/v3/repos/pages/#enable-a-pages-site">enable API</a> or <a href="/v3/repos/pages/#disable-a-pages-site">disable API</a> during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:</p>
+
+<pre><code> application/vnd.github.switcheroo-preview+json
+</code></pre>
+
+<p>During the preview period, we may change aspects of these APIs based on developer feedback.
+If we do, we will announce the changes here on the developer blog, but we will not provide any advance notice.</p>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Pages+toggle+API"&gt;let us know</a>!</p>
+
+
+tag:developer.github.com,2019-02-14:/changes/2019-02-14-draft-pull-requests/
+<title type="html">Preview the new Draft Pull Requests API</title>
+2019-02-14T08:00:00Z
+2019-02-14T08:00:00Z
+
+<div class="alert product"><p>
+
+Draft pull requests are available in public repositories with GitHub Free and GitHub Pro, and in public and private repositories with GitHub Team and GitHub Enterprise Cloud. For more information, see <a href="https://help.github.com/articles/github-s-billing-plans"&gt;GitHub's billing plans</a> in the GitHub Help documentation.
+
+</p></div>
+
+<p>We're releasing new GraphQL mutations and fields that allow you to handle draft pull requests. We're also showing the <code>draft</code> boolean in REST API responses. When this boolean is <code>true</code>, the pull request is in a draft state, and cannot be merged. For more information about draft pull requests, see "<a href="https://help.github.com/articles/about-pull-requests/"&gt;About pull requests</a>" in the GitHub Help documentation.</p>
+
+<p><strong><em>[Updated 03-22-19]</em></strong> You can also create draft pull requests using a new <code>draft</code> field in the <a href="/v3/pulls/#create-a-pull-request">Create a pull request</a> endpoint. </p>
+
+<h3>
+<a id="changes" class="anchor" href="#changes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Changes</h3>
+
+<ul>
+<li><a href="/v3/pulls/">REST API pull request responses include <code>draft</code> boolean</a></li>
+<li><a href="/v4/input_object/createpullrequestinput/"><code>CreatePullRequestInput</code> includes <code>draft</code> boolean</a></li>
+<li><a href="/v4/mutation/markpullrequestreadyforreview/"><code>markPullRequestReadyForReview</code> mutation</a></li>
+<li><a href="/v4/object/pullrequest/#fields"><code>PullRequest</code> object includes <code>draft</code> field</a></li>
+</ul>
+
+<p>To access these new API endpoints during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:</p>
+
+<pre><code>application/vnd.github.shadow-cat-preview+json
+</code></pre>
+
+<p>During the preview period, we may change aspects of these API endpoints based on developer feedback.
+If we do, we will announce the changes here on the developer blog, but we will not provide any advance notice.</p>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Draft+PR+API+Preview"&gt;let us know</a>!</p>
+
+
+tag:developer.github.com,2019-01-31:/changes/2019-01-31-removing-speedy-preview/
+<title type="html">Removing the strict validation preview</title>
+2019-01-31T08:00:00Z
+2019-01-31T08:00:00Z
+
+<p>As part of our plans for stricter validation in our REST API, we <a href="/changes/2018-09-26-pass-header-to-test-strict-validation-in-rest-api/">introduced</a> a preview header to test out the changes before the rollout. Stricter validation has been <a href="/changes/2018-11-07-strict-validation/">postponed</a> and beginning January 31, 2019, we will no longer support this header:</p>
+
+<pre><code>application/vnd.github.speedy-preview+json
+</code></pre>
+
+<p>We still believe that stricter validation would have a positive impact on our REST API overall and are looking for alternative ways to introduce it. Stay tuned for future updates.</p>
+
+<p>If you have any questions, please <a href="https://github.com/contact?form%5Bsubject%5D=Strict+validation+in+REST+API"&gt;reach out</a>!</p>
+
+
+tag:developer.github.com,2019-01-29:/changes/2019-01-29-life-after-github-services/
+<title type="html">"GitHub Services" Feature Deprecation: What to Expect</title>
+2019-01-29T08:00:00Z
+2019-01-29T08:00:00Z
+
+<p>As we have mentioned in previous posts, the "GitHub Services" feature will be deprecated <em>this Thursday</em>, <strong>January 31st, 2019</strong>. Here is what you can expect regarding "GitHub Services" going forward:</p>
+
+<ul>
+<li>GitHub will cut off all service hook deliveries. There will be no exceptions or extensions. If you still have service hooks configured for your repositories, we highly suggest migrating them to <a href="/webhooks/">webhooks</a> or <a href="/apps/">GitHub Apps</a>. Please see our "<a href="/v3/guides/replacing-github-services/">Replacing GitHub Services</a>" guide for more information on how to do that.</li>
+<li>The <a href="https://github.com/github/github-services"&gt;&lt;code&gt;github/github-services&lt;/code&gt;&lt;/a> repository will be <strong>archived</strong> and no more contributions to the services will be accepted.</li>
+<li>You will no longer be able to modify service hook configurations through the GitHub settings UI or the repository hooks API. This change will affect the following endpoints for <em>service hooks only</em>:
+
+<ul>
+<li><a href="/v3/repos/hooks/#edit-a-hook"><code>PATCH /repos/:owner/:repo/hooks/:hook_id</code></a></li>
+<li><a href="/v3/repos/hooks/#test-a-push-hook"><code>POST /repos/:owner/:repo/hooks/:hook_id/tests</code></a></li>
+<li><a href="/v3/repos/hooks/#ping-a-hook"><code>POST /repos/:owner/:repo/hooks/:hook_id/pings</code></a></li>
+</ul>
+</li>
+<li>You will still be able to view and remove service hooks through the GitHub settings UI and API until <strong>April 1st, 2019</strong>. After that date, we will be removing all service hook records.</li>
+<li>
+<strong><em>Updated 01-30-19</em></strong>: Email service hooks have been migrated to a new repository notifications feature. Management of those notifications can be found in the repository settings UI <em>only</em>. There are no necessary actions to be taken to enable this new feature, and there should be no interruption of service for email deliveries. See "<a href="https://help.github.com/articles/about-email-notifications-for-pushes-to-your-repository/"&gt;About email notifications for pushes to your repository</a>" in the GitHub Help documentation to learn how to configure commit email notifications. Email notifications for pushes to your repository will be available in GitHub Enterprise Server 2.17 and higher.</li>
+</ul>
+
+<div class="alert note">
+
+<p><strong>Note</strong>: The "GitHub Services" feature has a different deprecation timeline for GitHub Enterprise. Please see our <a href="/v3/guides/replacing-github-services/#supporting-github-enterprise-server">deprecation timeline</a> for more information.</p>
+
+</div>
+
+<p>Please <a href="https://github.com/contact?form%5Bsubject%5D=GitHub+Services+Deprecation"&gt;contact us</a> if you have any questions!</p>
+
+
+tag:developer.github.com,2018-12-18:/changes/2018-12-18-interactions-preview/
+<title type="html">Preview the new Interactions API</title>
+2018-12-18T08:00:00Z
+2018-12-18T08:00:00Z
+
+<p>We're releasing new REST API v3 endpoints that allow you to manage <a href="https://help.github.com/articles/limiting-interactions-in-your-repository/"&gt;repository&lt;/a> and <a href="https://help.github.com/articles/limiting-interactions-in-your-organization/"&gt;organization&lt;/a> interaction limits.</p>
+
+<h4>
+<a id="new-endpoints" class="anchor" href="#new-endpoints" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>New endpoints</h4>
+
+<ul>
+<li><a href="/v3/interactions/repos/#get-interaction-restrictions-for-a-repository">Get interaction restrictions for a repository</a></li>
+<li><a href="/v3/interactions/repos/#add-or-update-interaction-restrictions-for-a-repository">Add or update interaction restrictions for a repository</a></li>
+<li><a href="/v3/interactions/repos/#remove-interaction-restrictions-for-a-repository">Remove interaction restrictions for a repository</a></li>
+<li><a href="/v3/interactions/orgs/#get-interaction-restrictions-for-an-organization">Get interaction restrictions for an organization</a></li>
+<li><a href="/v3/interactions/orgs/#add-or-update-interaction-restrictions-for-an-organization">Add or update interaction restrictions for an organization</a></li>
+<li><a href="/v3/interactions/orgs/#remove-interaction-restrictions-for-an-organization">Remove interaction restrictions for an organization</a></li>
+</ul>
+
+<p>To access these new API endpoints during the preview period, you must provide a custom <a href="/v3/media">media type</a> in the <code>Accept</code> header:</p>
+
+<pre><code>application/vnd.github.sombra-preview+json
+</code></pre>
+
+<p>During the preview period, we may change aspects of these API endpoints based on developer feedback.
+If we do, we will announce the changes here on the developer blog, but we will not provide any advance notice.</p>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Interactions+API+Preview"&gt;let us know</a>!</p>
+
+
+tag:developer.github.com,2018-12-18:/changes/2018-12-18-content-attachments-api-time-limit/
+<title type="html">Creating Content Attachments Limited to 6 Hours</title>
+2018-12-18T08:00:00Z
+2018-12-18T08:00:00Z
+
+<p>In an effort to provide a predictable user experience, we are going to begin limiting the creation of content attachments to 6 hours from when the content reference URL was added.</p>
+
+<p>If an application tries to create a content attachment for a content reference URL older than 6 hours, a response with HTTP status code <code>422</code> will be returned.</p>
+
+<p>Please <a href="https://github.com/contact?form%5Bsubject%5D=Creating%20Content%20Attachments%20Limited%20to%206%20Hours"&gt;contact us</a> if you have any questions!</p>
+
+
+tag:developer.github.com,2018-12-10:/changes/2018-12-10-content-attachments-api/
+<title type="html">Content Attachments API Public Beta</title>
+2018-12-10T08:00:00Z
+2018-12-10T08:00:00Z
+
+<p>Developers share a lot of links on GitHub. Nearly one-third of comments on issues and pull requests include a link. Hidden behind each of those links is important context that can inform the conversation. Today weâ€™re excited to announce that you can curate and showcase content to help drive those conversations with the <strong>Content Attachments API</strong>, which is now in public beta.</p>
+
+<p>GitHub Apps now have the ability to listen for links in issues and pull requests and attach content to those links:</p>
+
+<p><img src="https://user-images.githubusercontent.com/7718702/49523156-188b3700-f8a1-11e8-8c08-9bfbdd9119b5.png" alt="demo screenshot"></p>
+
+<h1>
+<a id="setting-up-content-attachments" class="anchor" href="#setting-up-content-attachments" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Setting up content attachments</h1>
+
+<p><strong>Step 1.</strong> <a href="https://github.com/settings/apps/new"&gt;Create a GitHub App</a>.</p>
+
+<p>Register the domain that your app would like to create content attachments for (errors.ai in this case). Make sure to select <strong>Read &amp; write</strong> access:
+<img src="https://user-images.githubusercontent.com/7718702/49523374-918a8e80-f8a1-11e8-959a-7c2e8d8b8cba.png" alt="content references permission">
+Make sure to select the <strong>Content reference</strong> event:
+<img src="https://user-images.githubusercontent.com/7718702/49523475-c696e100-f8a1-11e8-812a-edff499106d0.png" alt="content reference event"></p>
+
+<p><strong>Step 2.</strong> Install your newly created GitHub App on a repository.</p>
+
+<h1>
+<a id="api-interaction-flow" class="anchor" href="#api-interaction-flow" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>API interaction flow</h1>
+
+<ol>
+<li><p>Someone posts a link in an issue or pull request on a repository where your app is installed.</p></li>
+<li>
+<p>Your app will receive a <code>content_reference</code> event with action <code>created</code>. The contents of the <code>content_reference</code> and <code>installation</code> hash are important.</p>
+
+<pre class="highlight highlight-json"><code><span class="p">{</span><span class="w">
+</span><span class="nt">"action"</span><span class="p">:</span><span class="w"> </span><span class="s2">"created"</span><span class="p">,</span><span class="w">
+</span><span class="nt">"content_reference"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1512</span><span class="p">,</span><span class="w">
+</span><span class="nt">"node_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MDE2OkNvbnRlbnRSZWZlcmVuY2UxNTEy"</span><span class="p">,</span><span class="w">
+</span><span class="nt">"reference"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://errors.ai/my-project/A-1234"&lt;/span&gt;&lt;span class="w">
+</span><span class="p">},</span><span class="w">
+</span><span class="nt">"repository"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">},</span><span class="w">
+</span><span class="nt">"sender"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">},</span><span class="w">
+</span><span class="nt">"installation"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">492164</span><span class="p">,</span><span class="w">
+</span><span class="nt">"node_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MDIzOkludGVncmF0aW9uSW5zdGFsbGF0aW9uNDkyMTY0"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</li>
+<li>
+<p>Using the <code>content_reference</code> <code>id</code> you can now create a content attachment using the API by supplying a <code>title</code> and <code>body</code> in the API call. You'll also need the <code>installation</code> <code>id</code> to authenticate as a <a href="/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-an-installation">GitHub App installation</a>. You can use markdown in the <code>body</code> parameter.</p>
+
+<pre class="highlight highlight-curl"><code>curl -X POST
+https://api.github.com/content_references/1512/attachments
+-H 'Accept: application/vnd.github.corsair-preview+json'
+-H 'Authorization: Bearer $INSTALLATION_TOKEN'
+-d '{
+"title": "[A-1234] IntegrityError in core/models.py",
+"body": "duplicate key violates unique constraint user_email_uniq\nDETAIL: Key (email)=(hubot@github.com) already exists..."
+}'
+</code></pre>
+</li>
+<li><p>You'll see the new content attachment appear under the link in a pull request or issue comment on GitHub:</p></li>
+</ol>
+
+<p><img src="https://user-images.githubusercontent.com/7718702/49371827-a4aa2c80-f6f0-11e8-8de2-ccca0941a245.png" alt="demo screenshot"></p>
+
+<h2>
+<a id="getting-started" class="anchor" href="#getting-started" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Getting started</h2>
+
+<p>Try out one of the apps already supporting content attachments or build your own:</p>
+
+<ul>
+<li><a href="https://glitch.com/edit/#!/remix/github-content-attachments-api"&gt;Remix our Glitch blueprint</a></li>
+<li><a href="/apps/using-content-attachments/">Further documentation</a></li>
+</ul>
+
+<h2>
+<a id="questions" class="anchor" href="#questions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Questions</h2>
+
+<h3>
+<a id="how-many-domains-can-an-app-register" class="anchor" href="#how-many-domains-can-an-app-register" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How many domains can an app register?</h3>
+
+<p>An app can register up to 5 domains, <a href="/apps/using-content-attachments/#about-content-attachments">read more.</a></p>
+
+<h3>
+<a id="what-kind-of-links-are-github-apps-notified-of" class="anchor" href="#what-kind-of-links-are-github-apps-notified-of" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What kind of links are GitHub Apps notified of?</h3>
+
+<p>For an app to receive a <code>content_reference</code> event, the posted link must be "free standing", so it cannot be part of a markdown link.</p>
+
+<p>If posted, this link will trigger the <code>content_reference</code> event:</p>
+
+<pre><code>https://example.com/test/url
+</code></pre>
+
+<p>However, this link will not:</p>
+
+<pre><code>my favorite URL
+</code></pre>
+
+<p>Also, remember, that for an app to receive the <code>content_reference</code> event, it needs to be installed on the repository and have the matching domain registered. So in the above case the app would need to have <code>example.com</code> registered as a content_reference in the app settings.</p>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Content+Attachments+API"&gt;let us know</a>!</p>
+
+
+tag:developer.github.com,2018-11-07:/changes/2018-11-07-strict-validation/
+<title type="html">Postponing stricter validation</title>
+2018-11-07T08:00:00Z
+2018-11-07T08:00:00Z
+
+<p>Recently we <a href="/changes/2018-09-25-stricter-validation-coming-soon-in-the-rest-api/">announced</a> plans for stricter validation in our REST API and have been monitoring the effect these changes would have on integrators. After careful consideration, we've decided to not rollout stricter validation at this time.</p>
+
+<p>The preview header introduced as part of this change will remain intact. You can continue to use stricter validation by passing the following header:</p>
+
+<pre><code>application/vnd.github.speedy-preview+json
+</code></pre>
+
+<p>We still believe that stricter validation would have a positive impact on our REST API overall and are looking for alternative ways to introduce it. Stay tuned for future updates.</p>
+
+<p>If you have any questions, please <a href="https://github.com/contact?form%5Bsubject%5D=Strict+validation+in+REST+API"&gt;reach out</a>!</p>
+
+
+tag:developer.github.com,2018-11-05:/changes/2018-11-05-github-services-brownout/
+<title type="html">GitHub Services Brownout Updates and Timeline</title>
+2018-11-05T08:00:00Z
+2018-11-05T08:00:00Z
+
+<p>On October 1st, we <a href="/changes/2018-10-01-denying-new-github-services">announced</a> that we were going to do a week-long brownout of <a href="https://github.com/github/github-services"&gt;GitHub Services</a>-based webhooks this week. During this time no GitHub Services payloads would have been delivered. The motivation behind the brownout is to allow our users and integrators to see the places that GitHub Services are still being used and begin working towards migrating away from GitHub Services. After a lot of thought and discussion, we've decided that a week-long brownout at this time would be too disruptive for everyone. Instead, we are going to do a gradual increase in brownouts until the final <em>blackout</em> date of <strong>January 31st, 2019</strong> (please see our <a href="/v3/guides/replacing-github-services/#deprecation-timeline">deprecation timeline</a> for more information on that).</p>
+
+<p>The following is the updated timeline for GitHub Services brownouts:</p>
+
+<ul>
+<li>
+<strong>November 7th, 2018</strong>: We will suspend GitHub Services deliveries for a few hours throughout the day.</li>
+<li>
+<strong>December 12th, 2018</strong>: GitHub Service deliveries will be suspended for a full 24 hours</li>
+<li>
+<strong>January 7th, 2019</strong>: GitHub Services will be suspended for a full 7 days. Regular deliveries will resume <strong>January 14th, 2019</strong>.</li>
+</ul>
+
+<p>We will make sure to post a status on our <a href="https://status.github.com/messages"&gt;status page</a> at the start and end of each of these brownouts.</p>
+
+<div class="alert note">
+
+<p><strong>Note</strong>: If this change affects you, please see our guide to <a href="/v3/guides/replacing-github-services/">Replacing GitHub Services</a> with webhooks.</p>
+
+</div>
+
+<p>Please <a href="https://github.com/contact?form%5Bsubject%5D=GitHub+Services+Brownout"&gt;contact us</a> if you have any questions!</p>
+
+
+tag:developer.github.com,2018-10-31:/changes/2018-10-31-improved-experience-for-marketplace-pending-changes/
+<title type="html">Improved Experience for Marketplace Pending Order Changes</title>
+2018-10-31T07:00:00Z
+2018-10-31T07:00:00Z
+
+<p>Today we are announcing updates to Marketplace-related webhooks and REST API's
+that will make handling orders with pending changes easier.</p>
+
+<h3>
+<a id="new-webhooks" class="anchor" href="#new-webhooks" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>New webhooks</h3>
+
+<p>Integrators can now receive hooks when someone submits a plan change that won't be processed until the end of their billing cycle. Learn more
+<a href="/v3/activity/events/types/#marketplacepurchaseevent">here</a>.</p>
+
+<h3>
+<a id="updated-apis" class="anchor" href="#updated-apis" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Updated API's</h3>
+
+<p>The same information can now also be fetched from the REST API.</p>
+
+<p>Learn more about fetching details about a <a href="/v3/apps/marketplace/#check-if-a-github-account-is-associated-with-any-marketplace-listing">single account</a>
+or for fetching <a href="/v3/apps/marketplace/#list-all-github-accounts-user-or-organization-on-a-specific-plan">all accounts</a> on a given plan.</p>
+
+<p>If you have any questions or feedback, please <a href="https://github.com/contact?form%5Bsubject%5D=Marketplace+Pending+Order+Change+API+hooks"&gt;let us know</a>!</p>
+
+
+tag:developer.github.com,2018-10-25:/changes/2018-10-25-webhook-log-retention-limited-to-30-days/
+<title type="html">Webhook Log Retention Limited to 30 Days</title>
+2018-10-25T07:00:00Z
+2018-10-25T07:00:00Z
+
+<p>In an effort to provide a more powerful and stable webhook log experience, we are going to begin limiting the webhook log retention to 30 days.</p>
+
+<p>The webhook logs are viewable only from the organization or repository settings UI. We currently allow users to page through webhook logs until the they reach the first delivery for that hook regardless of how old the delivery is. However, as of <strong>Friday, November 2nd</strong>, users will only be able to page back through 30 days of webhook delivery logs.</p>
+
+<div class="alert note">
+
+<p><strong>Note</strong>: This update does not affect GitHub Enterprise. The webhook log retention period on GitHub Enterprise will continue to be 8 days.</p>
+
+</div>
+
+<p>Please <a href="https://github.com/contact?form%5Bsubject%5D=Webhook+Log+Retention+Limited+30+Days"&gt;contact us</a> if you have any questions!</p>
+
+
+tag:developer.github.com,2018-10-24:/changes/2018-10-24-more-complete-pulls-workflow-in-graphql/
+<title type="html">Preview more complete workflows for Pull Requests in GraphQL</title>
+2018-10-24T07:00:00Z
+2018-10-24T07:00:00Z
+
+<p>To go with our recent <a href="/changes/2018-09-12-more-complete-issues-workflow-in-graphql/">issues preview</a>, we're releasing a more
+exhaustive Pull Request API in GraphQL to enable you to <a href="/v4/mutation/closepullrequest/">close</a> or
+<a href="/v4/mutation/mergepullrequest/">merge</a> pull requests.</p>
+
+<p>For a more complete list of new objects and mutations made available during this
+preview, please refer to the <a href="/v4/previews/">GraphQL docs</a>.</p>
+
+<p>To access this new API during the preview period, you must provide a custom
+<a href="/v3/media">media type</a> in the <code>Accept</code> header:</p>
+
+<pre><code> application/vnd.github.ocelot-preview
+</code></pre>
+
+<div class="alert note">
+
+<p><strong>Note:</strong> GraphQL APIs under preview cannot be accessed via the GraphQL Explorer at this time.</p>
+
+</div>
+
+<p>During the preview period, we may change aspects of these APIs based on
+developer feedback. If we do, we will announce the changes here on the developer
+blog, but we will not provide any advance notice.</p>
+
+<p>If you have any questions or feedback of other interactions you might like for
+issues, please <a href="https://github.com/contact?form%5Bsubject%5D=Pull+Requests+GraphQL+API"&gt;let us know</a>!</p>
+
+Comment on pull request
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>https://developer.github.com/</id>
+  <title>GitHub API Changes</title>
+  <updated>2019-12-03T08:00:00Z</updated>
+  <link rel="alternate" href="https://developer.github.com/"/>
+  <link rel="self" href="https://developer.github.com/changes.atom"/>
+  <author>
+    <name>hubot</name>
+    <uri>https://github.com/hubot</uri>
+  </author>
+  <entry>
+    <id>tag:developer.github.com,2019-12-03:/changes/2019-12-03-internal-visibility-changes/</id>
+    <title type="html">API changes to support internal repository visibility</title>
+    <published>2019-12-03T08:00:00Z</published>
+    <updated>2019-12-03T08:00:00Z</updated>
+    <link rel="alternate" href="https://developer.github.com/changes/2019-12-03-internal-visibility-changes/"/>
+    <content type="html">&lt;p&gt;Customers with an enterprise account using GitHub Enterprise Cloud and GitHub Enterprise Server 2.20+ have access to a third visibility option beyond public and private, called &lt;a href="https://help.github.com/en/github/creating-cloning-and-archiving-repositories/creating-an-internal-repository#about-internal-repositories"&gt;internal&lt;/a&gt;. We've made some recent API changes to support this option.&lt;/p&gt;
+
+&lt;h3&gt;
+&lt;a id="repository-creation-policy" class="anchor" href="#repository-creation-policy" aria-hidden="true"&gt;&lt;span aria-hidden="true" class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;Repository Creation Policy&lt;/h3&gt;
+
+&lt;p&gt;The REST v3 and GraphQL v4 APIs now support setting and retrieving granular repository creation permissions.&lt;/p&gt;
+
+&lt;h4&gt;
+&lt;a id="rest-v3-api" class="anchor" href="#rest-v3-api" aria-hidden="true"&gt;&lt;span aria-hidden="true" class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;REST v3 API&lt;/h4&gt;
+
+&lt;p&gt;In the REST v3 API, &lt;a href="/v3/orgs/#get-an-organization"&gt;Get an organization&lt;/a&gt;
+and &lt;a href="/v3/orgs/#edit-an-organization"&gt;Edit an organization&lt;/a&gt; endpoints have three
+new fields added to the existing &lt;code&gt;surtur&lt;/code&gt; preview:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;members_can_create_public_repositories&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;members_can_create_private_repositories&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;members_can_create_internal_repositories&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;In &lt;a href="/v3/orgs/#get-an-organization"&gt;Get an organization&lt;/a&gt; and &lt;a href="/v3/orgs/#edit-an-organization"&gt;Edit an organization&lt;/a&gt;, the existing &lt;code&gt;members_allowed_repository_creation_type&lt;/code&gt; field remains for backward compatibility but is deprecated and will be removed in the future. Its return value ignores internal repositories.&lt;/p&gt;
+
+&lt;p&gt;Values provided in the new fields while &lt;a href="/v3/orgs/#edit-an-organization"&gt;editing an organization&lt;/a&gt; override the existing &lt;code&gt;members_allowed_repository_creation_type&lt;/code&gt; field.&lt;/p&gt;
+
+&lt;h4&gt;
+&lt;a id="graphl-v4-api" class="anchor" href="#graphl-v4-api" aria-hidden="true"&gt;&lt;span aria-hidden="true" class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;GraphL v4 API&lt;/h4&gt;
+
+&lt;p&gt;Similar changes apply to the GraphQL v4 API. The &lt;a href="/v4/object/enterpriseownerinfo/"&gt;&lt;code&gt;EnterpriseOwnerInfo&lt;/code&gt; object&lt;/a&gt; has three new fields indicating the policy setting for Enterprise accounts:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;membersCanCreatePublicRepositoriesSetting&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;membersCanCreatePrivateRepositoriesSetting&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;membersCanCreateInternalRepositoriesSetting&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;These new fields coexist with the old &lt;code&gt;membersCanCreateRepositoriesSetting&lt;/code&gt; which does not account for internal repository creation policy. This field is now deprecated and will be removed in the future.&lt;/p&gt;
+
+&lt;p&gt;The &lt;a href="/v4/input_object/updateenterprisememberscancreaterepositoriessettinginput/"&gt;&lt;code&gt;UpdateEnterpriseMembersCanCreateRepositoriesSetting&lt;/code&gt; mutation&lt;/a&gt; includes four new input fields:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;
+&lt;code&gt;membersCanCreateRepositoriesPolicyEnabled&lt;/code&gt;, which toggles enterprise policy enforcement over organizations.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;membersCanCreatePublicRepositories&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;membersCanCreatePrivateRepositories&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;membersCanCreateInternalRepositories&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;These new fields coexist with the old &lt;code&gt;settingValue&lt;/code&gt; which does not account for internal repository creation policy. This field is also deprecated and will be removed in the future.&lt;/p&gt;
+
+&lt;h3&gt;
+&lt;a id="repository-visibility-fields" class="anchor" href="#repository-visibility-fields" aria-hidden="true"&gt;&lt;span aria-hidden="true" class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;Repository Visibility Fields&lt;/h3&gt;
+
+&lt;p&gt;You can now set and retrieve the visibility of a repository with a new field that accommodates &lt;code&gt;internal&lt;/code&gt; repositories, which are available to enterprise accounts using GitHub Enterprise Cloud or GitHub Enterprise Server 2.20+. In the REST v3 API, you will see the following changes:&lt;/p&gt;
+
+&lt;p&gt;These endpoints show &lt;code&gt;visibility&lt;/code&gt; key in the response:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;  &lt;a href="/v3/repos/#list-your-repositories"&gt;List your repositories&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;  &lt;a href="/v3/repos/#list-user-repositories"&gt;List user repositories&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="/v3/repos/#list-organization-repositories"&gt;List organization repositories&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/v3/repos/#create"&gt;Create repository&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/v3/repos/#create"&gt;Create repository using a repository template&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/v3/repos/#get"&gt;Get a repository&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/v3/repos/#edit"&gt;Edit repository&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;These endpoints have new input parameters:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;
+&lt;a href="/v3/repos/#create"&gt;Create repository&lt;/a&gt; has a new &lt;code&gt;visibility&lt;/code&gt; field which can be &lt;code&gt;public&lt;/code&gt;, &lt;code&gt;private&lt;/code&gt;, or &lt;code&gt;internal&lt;/code&gt;. A value provided here overrides any value set in the existing &lt;code&gt;private&lt;/code&gt; field.&lt;/li&gt;
+&lt;li&gt;
+&lt;a href="/v3/repos/#edit"&gt;Edit repository&lt;/a&gt; also has a new &lt;code&gt;visibility&lt;/code&gt; field with the same behavior as the Create endpoint.&lt;/li&gt;
+&lt;li&gt;
+&lt;a href="/v3/repos/#list-organization-repositories"&gt;List organization repositories&lt;/a&gt; has a new &lt;code&gt;internal&lt;/code&gt; input option for the &lt;code&gt;type&lt;/code&gt; parameter.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;To access the &lt;code&gt;visibility&lt;/code&gt; field for any of these endpoints, you must provide a custom media type in the Accept header:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;application/vnd.github.nebula-preview+json
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=API+changes+to+support+internal+repository+visibility"&gt;let us know&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2019-11-12:/changes/2019-11-12-managing-enterprise-accounts/</id>
+    <title type="html">Introducing the "Managing enterprise accounts" GraphQL API</title>
+    <published>2019-11-12T08:00:00Z</published>
+    <updated>2019-11-12T08:00:00Z</updated>
+    <link rel="alternate" href="https://developer.github.com/changes/2019-11-12-managing-enterprise-accounts/"/>
+    <content type="html">&lt;p&gt;Now you can manage your enterprise account using the GraphQL API, which efficiently returns just the data you request. This API is designed to handle all of your enterprise account management needs, from monitoring account settings, access changes, and users within your enterprise. The Managing Enterprise Accounts API is available for GitHub Enterprise Cloud and for GitHub Enterprise Server.&lt;/p&gt;
+
+&lt;p&gt;For more information, see "&lt;a href="/v4/guides/managing-enterprise-accounts"&gt;Managing enterprise accounts&lt;/a&gt;."&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2019-11-05:/changes/2019-11-05-deprecated-passwords-and-authorizations-api/</id>
+    <title type="html">Deprecated APIs and authentication</title>
+    <published>2019-11-05T08:00:00Z</published>
+    <updated>2019-11-05T08:00:00Z</updated>
+    <link rel="alternate" href="https://developer.github.com/changes/2019-11-05-deprecated-passwords-and-authorizations-api/"/>
+    <content type="html">&lt;p&gt;We are announcing deprecations that will improve the security of GitHub apps and APIs. We will provide more information during the following few months, including the exact timeline for discontinuing the support of these deprecations.&lt;/p&gt;
+
+&lt;h3&gt;
+&lt;a id="authenticating-using-passwords" class="anchor" href="#authenticating-using-passwords" aria-hidden="true"&gt;&lt;span aria-hidden="true" class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;Authenticating using passwords&lt;/h3&gt;
+
+&lt;p&gt;GitHub is deprecating password authentication to the API. Instead of using password authentication, create a personal access token using your &lt;a href="https://help.github.com/articles/creating-an-access-token-for-command-line-use"&gt;Personal access tokens settings page&lt;/a&gt; in limited situations like testing. You should authenticate apps in production by using the web applications flow. For more information, see "&lt;a href="/apps/building-oauth-apps/authorizing-oauth-apps/"&gt;Authorizing OAuth Apps&lt;/a&gt;."&lt;/p&gt;
+
+&lt;h3&gt;
+&lt;a id="authenticating-using-query-parameters" class="anchor" href="#authenticating-using-query-parameters" aria-hidden="true"&gt;&lt;span aria-hidden="true" class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;Authenticating using query parameters&lt;/h3&gt;
+
+&lt;p&gt;GitHub is deprecating authentication to the GitHub API using query parameters, such as using a &lt;code&gt;token&lt;/code&gt; query parameter for OAuth user authentication or a &lt;code&gt;client_id&lt;/code&gt;/&lt;code&gt;client_secret&lt;/code&gt; query parameter for OAuth application authentication.
+All authentication to the GitHub API should be done using &lt;a href="/v3/auth/#via-oauth-and-personal-access-tokens"&gt;HTTP basic authentication&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3&gt;
+&lt;a id="authenticating-with-saml-organizations" class="anchor" href="#authenticating-with-saml-organizations" aria-hidden="true"&gt;&lt;span aria-hidden="true" class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;Authenticating with SAML organizations&lt;/h3&gt;
+
+&lt;p&gt;Apps must use the &lt;a href="/apps/building-oauth-apps/authorizing-oauth-apps/#web-application-flow"&gt;web application flow&lt;/a&gt; to obtain OAuth tokens that work with GitHub SAML organizations. OAuth tokens created using the &lt;a href="/v3/oauth_authorizations"&gt;Authorizations API&lt;/a&gt; are unable to access resources for GitHub SAML organizations.&lt;/p&gt;
+
+&lt;h3&gt;
+&lt;a id="deprecating-and-adding-endpoints-for-the-oauth-authorizations-and-oauth-applications-apis" class="anchor" href="#deprecating-and-adding-endpoints-for-the-oauth-authorizations-and-oauth-applications-apis" aria-hidden="true"&gt;&lt;span aria-hidden="true" class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;Deprecating and adding endpoints for the OAuth Authorizations and OAuth Applications APIs&lt;/h3&gt;
+
+&lt;p&gt;GitHub is deprecating the &lt;a href="/v3/oauth_authorizations"&gt;Authorizations API&lt;/a&gt;, which includes these endpoints:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="/v3/oauth_authorizations/#list-your-authorizations"&gt;&lt;code&gt;GET /authorizations&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/v3/oauth_authorizations/#get-a-single-authorization"&gt;&lt;code&gt;GET /authorizations/:authorization_id&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/v3/oauth_authorizations/#create-a-new-authorization"&gt;&lt;code&gt;POST /authorizations&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app"&gt;&lt;code&gt;PUT /authorizations/clients/:client_id&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/v3/oauth_authorizations/#get-or-create-an-authorization-for-a-specific-app-and-fingerprint"&gt;&lt;code&gt;PUT /authorizations/clients/:client_id/:fingerprint&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/v3/oauth_authorizations/#update-an-existing-authorization"&gt;&lt;code&gt;PATCH /authorizations/:authorization_id&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/v3/oauth_authorizations/#delete-an-authorization"&gt;&lt;code&gt;DELETE /authorizations/:authorization_id&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/v3/oauth_authorizations/#list-your-grants"&gt;&lt;code&gt;GET /applications/grants&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/v3//oauth_authorizations/#get-a-single-grant"&gt;&lt;code&gt;GET /applications/grants/:grant_id&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/v3/oauth_authorizations/#delete-a-grant"&gt;&lt;code&gt;DELETE /applications/grants/:grant_id&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Some client-side integrations use the deprecated Authorizations API to create personal access tokens and OAuth access tokens. These tokens must now be created using our &lt;a href="/apps/building-oauth-apps/authorizing-oauth-apps/#web-application-flow"&gt;web application flow&lt;/a&gt;. When appropriate, personal access tokens can still be created by the user on the &lt;a href="https://github.com/settings/tokens"&gt;Personal access tokens&lt;/a&gt; page. However, most integrations should &lt;a href="https://github.com/settings/applications/new"&gt;register themselves&lt;/a&gt; as an OAuth application and use the web application flow to obtain an OAuth access token.&lt;/p&gt;
+
+&lt;p&gt;GitHub has replaced several deprecated endpoints with new ones. You can now find both the deprecated and new endpoints in the &lt;a href="/v3/apps/oauth_applications"&gt;OAuth Applications API&lt;/a&gt;. Specifically, we have deprecated OAuth Applications API endpoints containing an OAuth token as a path parameter:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="/v3/apps/oauth_applications/#check-an-authorization"&gt;&lt;code&gt;GET /applications/:client_id/tokens/:access_token&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/v3/apps/oauth_applications/#reset-an-authorization"&gt;&lt;code&gt;POST /applications/:client_id/tokens/:access_token&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/v3/apps/oauth_applications/#revoke-an-authorization-for-an-application"&gt;&lt;code&gt;DELETE /applications/:client_id/tokens/:access_token&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/v3/apps/oauth_applications/#revoke-a-grant-for-an-application"&gt;&lt;code&gt;DELETE /applications/:client_id/grants/:access_token&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;These new endpoints replace the deprecated endpoints:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="/v3/apps/oauth_applications/#check-a-token"&gt;&lt;code&gt;POST /applications/:client_id/token&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/v3/apps/oauth_applications/#reset-a-token"&gt;&lt;code&gt;PATCH /applications/:client_id/token&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/v3/apps/oauth_applications/#delete-an-app-token"&gt;&lt;code&gt;DELETE /applications/:client_id/token&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/v3/apps/oauth_applications/#delete-an-app-authorization"&gt;&lt;code&gt;DELETE /applications/:client_id/grant&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;
+&lt;a id="updating-command-line-utilities-to-use-localhost-based-redirect-urls" class="anchor" href="#updating-command-line-utilities-to-use-localhost-based-redirect-urls" aria-hidden="true"&gt;&lt;span aria-hidden="true" class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;Updating command-line utilities to use localhost-based redirect URLs&lt;/h3&gt;
+
+&lt;p&gt;Command-line tools now support a web-based flow by using localhost-based redirect URLs and specifying a port. We have extended our support for localhost-based redirect URLs to securely improve the experience of command-line utilities for client-side integrations. Historically these tools have relied on the Authorizations API, and they have not been able to easily register an OAuth URL callback to use with our OAuth &lt;a href="/apps/building-oauth-apps/authorizing-oauth-apps/#web-application-flow"&gt;web application flow&lt;/a&gt;. Please see our documentation on &lt;a href="/apps/building-oauth-apps/authorizing-oauth-apps/#localhost-redirect-urls"&gt;redirect URLs&lt;/a&gt; for more information.&lt;/p&gt;
+
+&lt;p&gt;If you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Deprecated+passwords+and+authorizations+api"&gt;let us know&lt;/a&gt;!&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2019-10-23:/changes/2019-10-23-get-installations-for-org/</id>
+    <title type="html">List GitHub App installations for an organization</title>
+    <published>2019-10-23T07:00:00Z</published>
+    <updated>2019-10-23T07:00:00Z</updated>
+    <link rel="alternate" href="https://developer.github.com/changes/2019-10-23-get-installations-for-org/"/>
+    <content type="html">&lt;p&gt;Now as an organization owner, you can &lt;a href="/v3/orgs/#list-installations-for-an-organization"&gt;list all GitHub App installations&lt;/a&gt; for an organization using the REST API. You must be an organization owner with &lt;code&gt;admin:read&lt;/code&gt; scope to use this endpoint. The installation count includes all GitHub Apps installed on repositories in the organization.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;GET /orgs/:org/installations
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To list all GitHub App installations for an organization, you must provide the &lt;code&gt;machine-man&lt;/code&gt; custom &lt;a href="/v3/media"&gt;media type&lt;/a&gt; in the &lt;code&gt;Accept&lt;/code&gt; header:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;application/vnd.github.machine-man-preview+json
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;During the preview period, we may change aspects of these APIs based on developer feedback.&lt;/p&gt;
+
+&lt;p&gt;If we do, we will announce the changes here on the developer blog, but we will not provide any advance notice.  If you have any questions or feedback, &lt;a href="https://github.com/contact?form%5Bsubject%5D=Feedback:+Listing+GitHub+App+installations+for+an+organization+via+the+API"&gt;let us know&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2019-10-04:/changes/2019-10-04-end-mister-fantastic-preview/</id>
+    <title type="html">GitHub Pages features become an official part of the REST API</title>
+    <published>2019-10-04T07:00:00Z</published>
+    <updated>2019-10-04T07:00:00Z</updated>
+    <link rel="alternate" href="https://developer.github.com/changes/2019-10-04-end-mister-fantastic-preview/"/>
+    <content type="html">&lt;p&gt;The features that are a part of the GitHub Pages &lt;code&gt;mister-fantastic-preview&lt;/code&gt; are now available on GitHub.com and will be available in the next versions of GitHub Enterprise (2.19 and higher). You will no longer need to pass a preview header to use most GitHub Pages API endpoints.&lt;/p&gt;
+
+&lt;h3&gt;
+&lt;a id="preview-media-type-no-longer-needed" class="anchor" href="#preview-media-type-no-longer-needed" aria-hidden="true"&gt;&lt;span aria-hidden="true" class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;Preview media type no longer needed&lt;/h3&gt;
+
+&lt;p&gt;Now that the preview period has ended (first announced in &lt;a href="/changes/2016-07-06-github-pages-preview-api/"&gt;July 2016&lt;/a&gt;), you no longer need to pass the &lt;code&gt;mister-fantastic-preview&lt;/code&gt; custom media type. Instead, we recommend that you specify v3 as the version in the Accept header:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;application/vnd.github.v3+json
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Please note that if you use GitHub Enterprise versions 2.8 to 2.18, you will still need to provide this custom media type in the Accept header:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;application/vnd.github.mister-fantastic-preview+json
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;Onward!&lt;/em&gt;&lt;/strong&gt;
+Thanks again to everyone that tried out these GitHub Pages API features during the preview period.&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2019-10-03:/changes/2019-10-03-multi-line-comments/</id>
+    <title type="html">Multi-line comments</title>
+    <published>2019-10-03T07:00:00Z</published>
+    <updated>2019-10-03T07:00:00Z</updated>
+    <link rel="alternate" href="https://developer.github.com/changes/2019-10-03-multi-line-comments/"/>
+    <content type="html">&lt;p&gt;Now you can create comments across multiple lines of code in a pull request diff using REST API or GraphQL.&lt;/p&gt;
+
+&lt;p&gt;To create multi-line comments or see multi-line comments with the new supported fields when you fetch comment responses, you must provide a custom &lt;a href="/v3/media"&gt;media type&lt;/a&gt; in the &lt;code&gt;Accept&lt;/code&gt; header:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;application/vnd.github.comfort-fade-preview+json
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;During the preview period, we may change aspects of these APIs based on developer feedback.&lt;/p&gt;
+
+&lt;p&gt;If we do, we will announce the changes here on the developer blog, but we will not provide any advance notice.  If you have any questions or feedback, &lt;a href="https://github.com/contact?form%5Bsubject%5D=Feedback%3A+API+support+for+Multi-line+comments"&gt;please let us know&lt;/a&gt;.&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2019-09-24:/changes/2019-09-24-team-sychronization-end-preview/</id>
+    <title type="html">Team sychronization become an official part of REST API</title>
+    <published>2019-09-24T07:00:00Z</published>
+    <updated>2019-09-24T07:00:00Z</updated>
+    <link rel="alternate" href="https://developer.github.com/changes/2019-09-24-team-sychronization-end-preview/"/>
+    <content type="html">&lt;p&gt;The features that are a part of the team sychronization &lt;code&gt;team-sync-preview&lt;/code&gt; are now available on GitHub.com. Going forward, the Team synchronization API endpoints will be available without a preview header.&lt;/p&gt;
+
+&lt;h3&gt;
+&lt;a id="preview-media-type-no-longer-needed" class="anchor" href="#preview-media-type-no-longer-needed" aria-hidden="true"&gt;&lt;span aria-hidden="true" class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;Preview media type no longer needed&lt;/h3&gt;
+
+&lt;p&gt;Now that the preview period has ended (first announced in &lt;a href="/changes/2019-06-12-team-sync/"&gt;June 2019&lt;/a&gt;), you no longer need to pass the &lt;code&gt;team-sync-preview&lt;/code&gt; custom media type.&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2019-09-06:/changes/2019-09-06-more-check-annotations-shown-in-files-changed-tab/</id>
+    <title type="html">More check annotations are now shown on the "Files changed" tab</title>
+    <published>2019-09-06T07:00:00Z</published>
+    <updated>2019-09-06T07:00:00Z</updated>
+    <link rel="alternate" href="https://developer.github.com/changes/2019-09-06-more-check-annotations-shown-in-files-changed-tab/"/>
+    <content type="html">&lt;p&gt;In May of 2018, we &lt;a href="/changes/2018-05-07-new-checks-api-public-beta/"&gt;announced the Checks API&lt;/a&gt;, which added many new capabilities for running checks on code. One of those new capabilities were check annotations, which let apps annotate specific lines of code as part of a check run.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://user-images.githubusercontent.com/7718702/60444186-9d121e00-9c14-11e9-9c51-d62791d5d317.png" alt="demo-screenshot-of-unchanged-files-with-check-annotations"&gt;&lt;/p&gt;
+
+&lt;p&gt;Check annotations point directly to those lines where a test failure or a lint error occurred, and they empower users to fix any kind of errors or warnings quickly so they can move forward with their pull requests.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="/assets/images/checks/checks_annotation.png" alt="demo-screenshot-from-checks-api-blog-post"&gt;&lt;/p&gt;
+
+&lt;p&gt;Today we're making check annotations even more powerful by bringing more of them to where you're already looking: the "Files changed" tab. Checks annotations created on lines or files that were &lt;strong&gt;not&lt;/strong&gt; modified as part of a pull request will now be prominently displayed alongside the diff.&lt;/p&gt;
+
+&lt;p&gt;Internal testing has proven that surfacing unchanged files with check annotations has been especially beneficial to our workflows, because test failures can often happen on files that weren't modified as part of a pull request.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href="https://github.com/wilhelmklopp/failing-test-annotation/pull/2/files"&gt;Click here to see it in action!&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;The best part? The &lt;a href="/v3/checks/runs/#annotations-object"&gt;API for creating check annotations&lt;/a&gt; has not changed. If you're already creating annotations on files or lines outside of the diff, then there's no need to modify any code to use this improvement.&lt;/p&gt;
+
+&lt;p&gt;If you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Feedback:+More+check+annotations+are+now+shown+on+the+Files+changed+tab"&gt;let us know.&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2019-09-05:/changes/2019-09-05-apps-protected-branches-api/</id>
+    <title type="html">Grant GitHub Apps push access to protected branches</title>
+    <published>2019-09-05T07:00:00Z</published>
+    <updated>2019-09-05T07:00:00Z</updated>
+    <link rel="alternate" href="https://developer.github.com/changes/2019-09-05-apps-protected-branches-api/"/>
+    <content type="html">&lt;p&gt;The &lt;a href="/v3/repos/branches/"&gt;Protected Branches API&lt;/a&gt; now allows you to grant GitHub Apps push access to protected branches.&lt;/p&gt;
+
+&lt;p&gt;You can only grant GitHub Apps push access to a protected branch if they have been installed with the repository contents &lt;code&gt;write&lt;/code&gt; permission.&lt;/p&gt;
+
+&lt;p&gt;The Protected Branches API now includes the following endpoints:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="/v3/repos/branches/#list-apps-with-access-to-protected-branch"&gt;&lt;code&gt;GET /repos/:owner/:repo/branches/:branch/protection/restrictions/apps&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/v3/repos/branches/#replace-app-restrictions-of-protected-branch"&gt;&lt;code&gt;PUT /repos/:owner/:repo/branches/:branch/protection/restrictions/apps&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/v3/repos/branches/#add-app-restrictions-of-protected-branch"&gt;&lt;code&gt;POST /repos/:owner/:repo/branches/:branch/protection/restrictions/apps&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/v3/repos/branches/#remove-app-restrictions-of-protected-branch"&gt;&lt;code&gt;DELETE /repos/:owner/:repo/branches/:branch/protection/restrictions/apps&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The existing endpoint to set branch protection now accepts app restrictions:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="/v3/repos/branches/#update-branch-protection"&gt;&lt;code&gt;PUT /repos/:owner/:repo/branches/:branch/protection&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Apps+Protected+Branchess"&gt;get in touch&lt;/a&gt;!&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2019-07-16:/changes/2019-07-16-repository-templates-api/</id>
+    <title type="html">Create and use repository templates</title>
+    <published>2019-07-16T07:00:00Z</published>
+    <updated>2019-07-16T07:00:00Z</updated>
+    <link rel="alternate" href="https://developer.github.com/changes/2019-07-16-repository-templates-api/"/>
+    <content type="html">&lt;p&gt;Repository templates enable you to create a new repository using an existing one that is marked &lt;code&gt;is_template&lt;/code&gt;. This only copies repository contents without copying the commit history.&lt;/p&gt;
+
+&lt;p&gt;To access the new API, you must provide a custom media type in the Accept header:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;application/vnd.github.baptiste-preview+json
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The following new endpoint is available for you to generate a new repository from a template repository:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="/v3/repos/#create-repository-using-a-repository-template"&gt;&lt;code&gt;POST /repos/:owner/:repo/generate&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;In addition, you can make your repository available as a template when you &lt;a href="/v3/repos/#create"&gt;Create&lt;/a&gt; or &lt;a href="/v3/repos/#edit"&gt;Edit&lt;/a&gt; the repository. You can also &lt;a href="/v3/repos/#get"&gt;GET&lt;/a&gt; a repository's information to see if the repository is available to use as a template (&lt;code&gt;is_template&lt;/code&gt; key is &lt;code&gt;true&lt;/code&gt;) or was generated from a &lt;code&gt;template_repository&lt;/code&gt;. For more information, see the &lt;a href="/v3/repos/"&gt;Repositories API&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;During the preview period, we may change aspects of these APIs based on developer feedback.
+If we do, we will announce the changes here on the developer blog, but we will not provide any advance notice.&lt;/p&gt;
+
+&lt;p&gt;If you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=baptiste+preview"&gt;let us know&lt;/a&gt;!&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2019-06-12:/changes/2019-06-12-team-sync/</id>
+    <title type="html">Connect GitHub teams and IdP groups</title>
+    <published>2019-06-12T07:00:00Z</published>
+    <updated>2019-06-12T07:00:00Z</updated>
+    <link rel="alternate" href="https://developer.github.com/changes/2019-06-12-team-sync/"/>
+    <content type="html">&lt;div class="alert product"&gt;&lt;p&gt;
+
+Team synchronization is available for organizations using GitHub Enterprise Cloud. For more information, see &lt;a href="https://help.github.com/articles/github-s-products"&gt;GitHub's products&lt;/a&gt; in the GitHub Help documentation.
+
+&lt;/p&gt;&lt;/div&gt;
+
+&lt;p&gt;The &lt;a href="/v3/teams/team_sync/"&gt;Team Synchronization API&lt;/a&gt; allows you to manage connections between GitHub teams and external identity provider (IdP) groups.&lt;/p&gt;
+
+&lt;p&gt;You can manage GitHub team members through your IdP with team synchronization. Team synchronization must be enabled to use the Team Synchronization API. For more information, see "&lt;a href="https://help.github.com/articles/synchronizing-teams-between-your-identity-provider-and-github/"&gt;Synchronizing teams between your identity provider and GitHub&lt;/a&gt;" in the GitHub Help documentation.&lt;/p&gt;
+
+&lt;p&gt;To access the new API, you will need to &lt;a href="https://help.github.com/en/articles/authorizing-a-personal-access-token-for-use-with-a-saml-single-sign-on-organization"&gt;authorize your API token&lt;/a&gt; for use with your IdP (SSO) provider. You must also provide a custom media type in the Accept header:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;application/vnd.github.team-sync-preview+json
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The following endpoints in the &lt;a href="/v3/teams/team_sync/"&gt;Team Synchronization API&lt;/a&gt; are available for you to use:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;GET /orgs/:org/team-sync/groups&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;GET /teams/:team_id/team-sync/group-mappings&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;PATCH /teams/:team_id/team-sync/group-mappings&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;During the preview period, we may change aspects of these APIs based on developer feedback.
+If we do, we will announce the changes here on the developer blog, but we will not provide any advance notice.&lt;/p&gt;
+
+&lt;p&gt;If you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=team+sync+preview"&gt;let us know&lt;/a&gt;!&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2019-06-04:/changes/2019-06-04-automated-security-fixes/</id>
+    <title type="html">Enable or disable automated security fixes for a repository</title>
+    <published>2019-06-04T07:00:00Z</published>
+    <updated>2019-06-04T07:00:00Z</updated>
+    <link rel="alternate" href="https://developer.github.com/changes/2019-06-04-automated-security-fixes/"/>
+    <content type="html">&lt;p&gt;Previously, you could only enable or disable automated security fixes from a repository's security alerts page. We understand that having to do this for a large amount of repositories is not an optimal user experience.  We've heard your feedback and are pleased to announce that we have released a new set of endpoints to manage the automated security fixes setting for your repositories.&lt;/p&gt;
+
+&lt;p&gt;To access the new endpoints, you must provide a custom media type in the Accept header:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;application/vnd.github.london-preview+json
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The first endpoint allows you to &lt;a href="/v3/repos/#enable-automated-security-fixes"&gt;enable&lt;/a&gt; the automated security fixes setting:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;PUT /repos/:owner/:repo/automated-security-fixes
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The second endpoint allows you to &lt;a href="/v3/repos/#disable-automated-security-fixes"&gt;disable&lt;/a&gt; the automated security fixes setting:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;DELETE /repos/:owner/:repo/automated-security-fixes
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;During the preview period, we may change aspects of these APIs based on developer feedback.
+If we do, we will announce the changes here on the developer blog, but we will not provide any advance notice.&lt;/p&gt;
+
+&lt;p&gt;If you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=london+preview"&gt;let us know&lt;/a&gt;!&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2019-05-29:/changes/2019-05-29-update-branch-api/</id>
+    <title type="html">Perform an "Update branch" on a pull request via the REST API</title>
+    <published>2019-05-29T07:00:00Z</published>
+    <updated>2019-05-29T07:00:00Z</updated>
+    <link rel="alternate" href="https://developer.github.com/changes/2019-05-29-update-branch-api/"/>
+    <content type="html">&lt;p&gt;We are pleased to announce a new API for updating the branch on a pull request, the &lt;strong&gt;Update Branch API&lt;/strong&gt;. Rather than having to manually click a button to update the HEAD of a pull request branch with the latest changes from the base branch, you can now do so with one REST API endpoint call.&lt;/p&gt;
+
+&lt;p&gt;Why not just use the &lt;a href="/v3/repos/merging/#perform-a-merge"&gt;Merging API&lt;/a&gt;?  Good question, and of course you can!  The advantage of using this new API is that you only need the pull request number, not the &lt;code&gt;base&lt;/code&gt; or &lt;code&gt;head&lt;/code&gt;. This could potentially save a few roundtrips to the API and reduce the risk of getting rate limited.&lt;/p&gt;
+
+&lt;p&gt;To access the new endpoints, you must provide a custom media type in the Accept header:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;application/vnd.github.lydian-preview+json
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;a href="/v3/pulls/#update-a-pull-request-branch"&gt;update a pull request branch&lt;/a&gt; endpoint allows you to update the HEAD of the pull request branch for a pull request.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;PUT /repos/:owner/:repo/pulls/:pull_number/update-branch
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;During the preview period, we may change aspects of these APIs based on developer feedback.
+If we do, we will announce the changes here on the developer blog, but we will not provide any advance notice.&lt;/p&gt;
+
+&lt;p&gt;Feedback &lt;a href="https://github.com/contact?form%5Bsubject%5D=lydian+preview"&gt;welcomed&lt;/a&gt;!&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2019-04-24:/changes/2019-04-24-vulnerability-alerts/</id>
+    <title type="html">Enable or disable vulnerability alerts for a repository</title>
+    <published>2019-04-24T07:00:00Z</published>
+    <updated>2019-04-24T07:00:00Z</updated>
+    <link rel="alternate" href="https://developer.github.com/changes/2019-04-24-vulnerability-alerts/"/>
+    <content type="html">&lt;p&gt;Previously, you could only enable or disable repository vulnerability alerts by checking a box in a repository's settings.  We understand that having to do this for a large amount of repositories is not an optimal user experience.  We've heard your feedback and are pleased to announce that we have released a new set of endpoints to manage the vulnerability alerts setting for your repositories.&lt;/p&gt;
+
+&lt;p&gt;To access the new endpoints, you must provide a custom media type in the Accept header:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;application/vnd.github.dorian-preview+json
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The first endpoint allows you to &lt;a href="/v3/repos/#enable-vulnerability-alerts"&gt;enable&lt;/a&gt; the vulnerability alerts setting:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;PUT /repos/:owner/:repo/vulnerability-alerts
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And the second endpoint allows you to &lt;a href="/v3/repos/#disable-vulnerability-alerts"&gt;disable&lt;/a&gt; the vulnerability alerts setting:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;DELETE /repos/:owner/:repo/vulnerability-alerts
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;During the preview period, we may change aspects of these APIs based on developer feedback.
+If we do, we will announce the changes here on the developer blog, but we will not provide any advance notice.&lt;/p&gt;
+
+&lt;p&gt;If you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=dorian+preview"&gt;let us know&lt;/a&gt;!&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;[Updated 06-10-19]&lt;/em&gt;&lt;/strong&gt; You can also &lt;a href="/v3/repos/#check-if-vulnerability-alerts-are-enabled-for-a-repository"&gt;check whether repository alerts are enabled or disabled&lt;/a&gt; for a repository using a new endpoint.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  GET /repos/:owner/:repo/vulnerability-alerts
+&lt;/code&gt;&lt;/pre&gt;</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2019-04-18:/changes/2019-04-18-new-webhook-events-and-actions/</id>
+    <title type="html">New webhook events and actions</title>
+    <published>2019-04-18T07:00:00Z</published>
+    <updated>2019-04-18T07:00:00Z</updated>
+    <link rel="alternate" href="https://developer.github.com/changes/2019-04-18-new-webhook-events-and-actions/"/>
+    <content type="html">&lt;p&gt;Our webhooks team is pleased to announce that we have added some long-awaited webhook events and actions to the list that we support and they will be available today. You'll automatically begin receiving these events if you have a webhook that is subscribed to &lt;a href="/webhooks/#wildcard-event"&gt;wildcard&lt;/a&gt; events, otherwise you will be able to select the new events from the list in your webhook settings. As always, we continue to &lt;a href="/changes/2016-03-15-new-webhook-actions/#how-to-work-with-new-event-actions"&gt;recommend listening for the actions&lt;/a&gt; in order to future-proof your code.&lt;/p&gt;
+
+&lt;p&gt;Here are the new events and actions that we've added:&lt;/p&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Event&lt;/th&gt;
+&lt;th&gt;Action&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="/v3/activity/events/types#deploykeyevent"&gt;&lt;code&gt;DeployKeyEvent&lt;/code&gt;&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;created&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Triggered when a deploy key is added to a repository.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="/v3/activity/events/types#deploykeyevent"&gt;&lt;code&gt;DeployKeyEvent&lt;/code&gt;&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;deleted&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Triggered when a deploy key is removed from a repository.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="/v3/activity/events/types#issuesevent"&gt;&lt;code&gt;IssueEvent&lt;/code&gt;&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;locked&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Triggered when an issue is locked.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="/v3/activity/events/types#issuesevent"&gt;&lt;code&gt;IssueEvent&lt;/code&gt;&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;unlocked&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Triggered when an issue is unlocked.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="/v3/activity/events/types#metaevent"&gt;&lt;code&gt;MetaEvent&lt;/code&gt;&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;deleted&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Triggered when the hook itself is deleted.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="/v3/activity/events/types#organizationevent"&gt;&lt;code&gt;OrganizationEvent&lt;/code&gt;&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;renamed&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Triggered when the organization is renamed.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="/v3/activity/events/types#organizationevent"&gt;&lt;code&gt;OrganizationEvent&lt;/code&gt;&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;deleted&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Triggered when the organization is deleted.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="/v3/activity/events/types#pullrequestevent"&gt;&lt;code&gt;PullRequestEvent&lt;/code&gt;&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;locked&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Triggered when a pull request is locked.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="/v3/activity/events/types#pullrequestevent"&gt;&lt;code&gt;PullRequestEvent&lt;/code&gt;&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;unlocked&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Triggered when a pull request is unlocked.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="/v3/activity/events/types#releaseevent"&gt;&lt;code&gt;ReleaseEvent&lt;/code&gt;&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;created&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Triggered when a release is created.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="/v3/activity/events/types#releaseevent"&gt;&lt;code&gt;ReleaseEvent&lt;/code&gt;&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;edited&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Triggered when a release is edited.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="/v3/activity/events/types#releaseevent"&gt;&lt;code&gt;ReleaseEvent&lt;/code&gt;&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;deleted&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Triggered when a release is deleted.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="/v3/activity/events/types#releaseevent"&gt;&lt;code&gt;ReleaseEvent&lt;/code&gt;&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;prereleased&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Triggered when a release is prereleased.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="/v3/activity/events/types#releaseevent"&gt;&lt;code&gt;ReleaseEvent&lt;/code&gt;&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;unpublished&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Triggered when a release is unpublished.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="/v3/activity/events/types#repositoryevent"&gt;&lt;code&gt;RepositoryEvent&lt;/code&gt;&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;edited&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Triggered when attributes on a repository (e.g. description, default branch, homepage) are changed.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="/v3/activity/events/types#repositoryevent"&gt;&lt;code&gt;RepositoryEvent&lt;/code&gt;&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;renamed&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Triggered when a repository is renamed.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="/v3/activity/events/types#repositoryevent"&gt;&lt;code&gt;RepositoryEvent&lt;/code&gt;&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;transferred&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Triggered when a repository is transferred to a new owner.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="/v3/activity/events/types#starevent"&gt;&lt;code&gt;StarEvent&lt;/code&gt;&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;created&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Triggered when a star is added to a repository.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a href="/v3/activity/events/types#starevent"&gt;&lt;code&gt;StarEvent&lt;/code&gt;&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;deleted&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Triggered when a star is removed from a repository.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Please visit our &lt;a href="/webhooks"&gt;webhooks documentation&lt;/a&gt; to view all of the events and actions that we support, and to get more information on these new ones.&lt;/p&gt;
+
+&lt;p&gt;If you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=New+Webhook+Events"&gt;get in touch&lt;/a&gt;!&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2019-04-11:/changes/2019-04-11-pulls-branches-for-commit/</id>
+    <title type="html">List branches or pull requests for a commit (preview)</title>
+    <published>2019-04-11T07:00:00Z</published>
+    <updated>2019-04-11T07:00:00Z</updated>
+    <link rel="alternate" href="https://developer.github.com/changes/2019-04-11-pulls-branches-for-commit/"/>
+    <content type="html">&lt;p&gt;We're releasing a couple of REST endpoints that enable you to retrieve additional information from an existing commit.&lt;/p&gt;
+
+&lt;p&gt;To access the new endpoints you must provide a custom media type in the Accept header:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;application/vnd.github.groot-preview+json
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The first endpoint allows you to &lt;a href="/v3/repos/commits/#list-branches-for-head-commit"&gt;get the list of branches&lt;/a&gt; where the given commit is the &lt;code&gt;HEAD&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;GET /repos/:owner/:repo/commits/:commit_sha/branches-where-head
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The second one enables you to &lt;a href="/v3/repos/commits/#list-pull-requests-associated-with-commit"&gt;get a list of pull requests&lt;/a&gt; associated with the commit:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;GET /repos/:owner/:repo/commits/:commit_sha/pulls
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;During the preview period, we may change aspects of these APIs based on developer feedback.
+If we do, we will announce the changes here on the developer blog, but we will not provide any advance notice.&lt;/p&gt;
+
+&lt;p&gt;If you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Groot+preview"&gt;let us know&lt;/a&gt;!&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2019-03-29:/changes/2019-03-29-webhooks-ip-changes/</id>
+    <title type="html">Webhook IP addresses are changing</title>
+    <published>2019-03-29T07:00:00Z</published>
+    <updated>2019-03-29T07:00:00Z</updated>
+    <link rel="alternate" href="https://developer.github.com/changes/2019-03-29-webhooks-ip-changes/"/>
+    <content type="html">&lt;p&gt;On April 9th, GitHub will begin sending webhooks from the &lt;code&gt;140.82.112.0/20&lt;/code&gt; range of IP addresses in addition to the older &lt;code&gt;192.30.252.0/22&lt;/code&gt; range.&lt;/p&gt;
+
+&lt;p&gt;We use a large pool of IP's to reach our customers, and we are adding further netblocks to help serve webhooks more reliably. If you have rules in place that only allow GitHub webhooks from our trusted addresses, you will need to update them.&lt;/p&gt;
+
+&lt;p&gt;This block of IPs has been in the &lt;a href="https://help.github.com/en/articles/about-githubs-ip-addresses"&gt;/meta&lt;/a&gt; API endpoint since May 2018, but we wanted to announce this update in case you missed it.&lt;/p&gt;
+
+&lt;p&gt;Please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Webhooks+IPs+Are+Changing"&gt;contact us&lt;/a&gt; if you have any questions.&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2019-03-26:/changes/2019-03-26-new-response-code-for-notifications-marked-as-read-in-bulk/</id>
+    <title type="html">New response code for notifications marked as "read" in bulk</title>
+    <published>2019-03-26T07:00:00Z</published>
+    <updated>2019-03-26T07:00:00Z</updated>
+    <link rel="alternate" href="https://developer.github.com/changes/2019-03-26-new-response-code-for-notifications-marked-as-read-in-bulk/"/>
+    <content type="html">&lt;p&gt;You can use the &lt;a href="/v3/activity/notifications/#mark-as-read"&gt;&lt;code&gt;/PUT notifications&lt;/code&gt;&lt;/a&gt; endpoint to mark all notifcations as "read." Similarly, you can use the &lt;a href="/v3/activity/notifications/#mark-notifications-as-read-in-a-repository"&gt;&lt;code&gt;PUT /repos/:owner/:repo/notifications&lt;/code&gt;&lt;/a&gt; endpoint to mark all notifications as "read" for a specific repository.&lt;/p&gt;
+
+&lt;p&gt;Sometimes, GitHub would time out and return an error when there were too many unread notifications to process in a single request. We've changed both endpoints to trigger a background job that will mark the notifications as "read" asynchronously. If the operation is too expensive for a single request, the endpoint returns a &lt;code&gt;202&lt;/code&gt; status code with the following response:&lt;/p&gt;
+
+&lt;pre class="highlight highlight-json"&gt;&lt;code&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="nt"&gt;"message"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"Unread notifications couldn't be marked in a single request. Notifications are being marked as read in the background."&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;p&gt;After analyzing recent request data and we expect very few requests to trigger a background job. Most requests should return a &lt;code&gt;205&lt;/code&gt; status code as usual. If you do receive a &lt;code&gt;202&lt;/code&gt; status code, it will take a short amount of time for all notifications to be marked as "read" in the background job. There is currently no way to check if the job has completed. Instead, we recommend checking the number of unread notifications in separate requests using one of these endpoints:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;GET https://api.github.com/notifications?all=false
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;or&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;GET https://api.github.com/repos/:owner/:repo/notifications?all=false
+&lt;/code&gt;&lt;/pre&gt;</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2019-03-14:/changes/2019-03-14-enabling-disabling-pages/</id>
+    <title type="html">Preview enable and disable Pages API endpoints</title>
+    <published>2019-03-14T07:00:00Z</published>
+    <updated>2019-03-14T07:00:00Z</updated>
+    <link rel="alternate" href="https://developer.github.com/changes/2019-03-14-enabling-disabling-pages/"/>
+    <content type="html">&lt;p&gt;We're releasing a new Pages API preview that allows you to enable and disable GitHub Pages from the REST v3 API. These add to our existing Pages APIs which allow you to access &amp;amp; update Pages configuration as well as access &amp;amp; create new builds.&lt;/p&gt;
+
+&lt;p&gt;To access the &lt;a href="/v3/repos/pages/#enable-a-pages-site"&gt;enable API&lt;/a&gt; or &lt;a href="/v3/repos/pages/#disable-a-pages-site"&gt;disable API&lt;/a&gt; during the preview period, you must provide a custom &lt;a href="/v3/media"&gt;media type&lt;/a&gt; in the &lt;code&gt;Accept&lt;/code&gt; header:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;   application/vnd.github.switcheroo-preview+json
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;During the preview period, we may change aspects of these APIs based on developer feedback.
+If we do, we will announce the changes here on the developer blog, but we will not provide any advance notice.&lt;/p&gt;
+
+&lt;p&gt;If you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Pages+toggle+API"&gt;let us know&lt;/a&gt;!&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2019-02-14:/changes/2019-02-14-draft-pull-requests/</id>
+    <title type="html">Preview the new Draft Pull Requests API</title>
+    <published>2019-02-14T08:00:00Z</published>
+    <updated>2019-02-14T08:00:00Z</updated>
+    <link rel="alternate" href="https://developer.github.com/changes/2019-02-14-draft-pull-requests/"/>
+    <content type="html">&lt;div class="alert product"&gt;&lt;p&gt;
+
+Draft pull requests are available in public repositories with GitHub Free and GitHub Pro, and in public and private repositories with GitHub Team and GitHub Enterprise Cloud. For more information, see &lt;a href="https://help.github.com/articles/github-s-billing-plans"&gt;GitHub's billing plans&lt;/a&gt; in the GitHub Help documentation.
+
+&lt;/p&gt;&lt;/div&gt;
+
+&lt;p&gt;We're releasing new GraphQL mutations and fields that allow you to handle draft pull requests. We're also showing the &lt;code&gt;draft&lt;/code&gt; boolean in REST API responses. When this boolean is &lt;code&gt;true&lt;/code&gt;, the pull request is in a draft state, and cannot be merged. For more information about draft pull requests, see "&lt;a href="https://help.github.com/articles/about-pull-requests/"&gt;About pull requests&lt;/a&gt;" in the GitHub Help documentation.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;[Updated 03-22-19]&lt;/em&gt;&lt;/strong&gt; You can also create draft pull requests using a new &lt;code&gt;draft&lt;/code&gt; field in the &lt;a href="/v3/pulls/#create-a-pull-request"&gt;Create a pull request&lt;/a&gt; endpoint. &lt;/p&gt;
+
+&lt;h3&gt;
+&lt;a id="changes" class="anchor" href="#changes" aria-hidden="true"&gt;&lt;span aria-hidden="true" class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;Changes&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="/v3/pulls/"&gt;REST API pull request responses include &lt;code&gt;draft&lt;/code&gt; boolean&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/v4/input_object/createpullrequestinput/"&gt;&lt;code&gt;CreatePullRequestInput&lt;/code&gt; includes &lt;code&gt;draft&lt;/code&gt; boolean&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/v4/mutation/markpullrequestreadyforreview/"&gt;&lt;code&gt;markPullRequestReadyForReview&lt;/code&gt; mutation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/v4/object/pullrequest/#fields"&gt;&lt;code&gt;PullRequest&lt;/code&gt; object includes &lt;code&gt;draft&lt;/code&gt; field&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;To access these new API endpoints during the preview period, you must provide a custom &lt;a href="/v3/media"&gt;media type&lt;/a&gt; in the &lt;code&gt;Accept&lt;/code&gt; header:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;application/vnd.github.shadow-cat-preview+json
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;During the preview period, we may change aspects of these API endpoints based on developer feedback.
+If we do, we will announce the changes here on the developer blog, but we will not provide any advance notice.&lt;/p&gt;
+
+&lt;p&gt;If you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Draft+PR+API+Preview"&gt;let us know&lt;/a&gt;!&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2019-01-31:/changes/2019-01-31-removing-speedy-preview/</id>
+    <title type="html">Removing the strict validation preview</title>
+    <published>2019-01-31T08:00:00Z</published>
+    <updated>2019-01-31T08:00:00Z</updated>
+    <link rel="alternate" href="https://developer.github.com/changes/2019-01-31-removing-speedy-preview/"/>
+    <content type="html">&lt;p&gt;As part of our plans for stricter validation in our REST API, we &lt;a href="/changes/2018-09-26-pass-header-to-test-strict-validation-in-rest-api/"&gt;introduced&lt;/a&gt; a preview header to test out the changes before the rollout. Stricter validation has been &lt;a href="/changes/2018-11-07-strict-validation/"&gt;postponed&lt;/a&gt; and beginning January 31, 2019, we will no longer support this header:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;application/vnd.github.speedy-preview+json
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We still believe that stricter validation would have a positive impact on our REST API overall and are looking for alternative ways to introduce it. Stay tuned for future updates.&lt;/p&gt;
+
+&lt;p&gt;If you have any questions, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Strict+validation+in+REST+API"&gt;reach out&lt;/a&gt;!&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2019-01-29:/changes/2019-01-29-life-after-github-services/</id>
+    <title type="html">"GitHub Services" Feature Deprecation: What to Expect</title>
+    <published>2019-01-29T08:00:00Z</published>
+    <updated>2019-01-29T08:00:00Z</updated>
+    <link rel="alternate" href="https://developer.github.com/changes/2019-01-29-life-after-github-services/"/>
+    <content type="html">&lt;p&gt;As we have mentioned in previous posts, the "GitHub Services" feature will be deprecated &lt;em&gt;this Thursday&lt;/em&gt;, &lt;strong&gt;January 31st, 2019&lt;/strong&gt;. Here is what you can expect regarding "GitHub Services" going forward:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;GitHub will cut off all service hook deliveries. There will be no exceptions or extensions. If you still have service hooks configured for your repositories, we highly suggest migrating them to &lt;a href="/webhooks/"&gt;webhooks&lt;/a&gt; or &lt;a href="/apps/"&gt;GitHub Apps&lt;/a&gt;. Please see our "&lt;a href="/v3/guides/replacing-github-services/"&gt;Replacing GitHub Services&lt;/a&gt;" guide for more information on how to do that.&lt;/li&gt;
+&lt;li&gt;The &lt;a href="https://github.com/github/github-services"&gt;&lt;code&gt;github/github-services&lt;/code&gt;&lt;/a&gt; repository will be &lt;strong&gt;archived&lt;/strong&gt; and no more contributions to the services will be accepted.&lt;/li&gt;
+&lt;li&gt;You will no longer be able to modify service hook configurations through the GitHub settings UI or the repository hooks API. This change will affect the following endpoints for &lt;em&gt;service hooks only&lt;/em&gt;:
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="/v3/repos/hooks/#edit-a-hook"&gt;&lt;code&gt;PATCH /repos/:owner/:repo/hooks/:hook_id&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/v3/repos/hooks/#test-a-push-hook"&gt;&lt;code&gt;POST /repos/:owner/:repo/hooks/:hook_id/tests&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/v3/repos/hooks/#ping-a-hook"&gt;&lt;code&gt;POST /repos/:owner/:repo/hooks/:hook_id/pings&lt;/code&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;You will still be able to view and remove service hooks through the GitHub settings UI and  API until &lt;strong&gt;April 1st, 2019&lt;/strong&gt;. After that date, we will be removing all service hook records.&lt;/li&gt;
+&lt;li&gt;
+&lt;strong&gt;&lt;em&gt;Updated 01-30-19&lt;/em&gt;&lt;/strong&gt;: Email service hooks have been migrated to a new repository notifications feature. Management of those notifications can be found in the repository settings UI &lt;em&gt;only&lt;/em&gt;. There are no necessary actions to be taken to enable this new feature, and there should be no interruption of service for email deliveries. See "&lt;a href="https://help.github.com/articles/about-email-notifications-for-pushes-to-your-repository/"&gt;About email notifications for pushes to your repository&lt;/a&gt;" in the GitHub Help documentation to learn how to configure commit email notifications. Email notifications for pushes to your repository will be available in GitHub Enterprise Server 2.17 and higher.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class="alert note"&gt;
+
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: The "GitHub Services" feature has a different deprecation timeline for GitHub Enterprise. Please see our &lt;a href="/v3/guides/replacing-github-services/#supporting-github-enterprise-server"&gt;deprecation timeline&lt;/a&gt; for more information.&lt;/p&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;Please &lt;a href="https://github.com/contact?form%5Bsubject%5D=GitHub+Services+Deprecation"&gt;contact us&lt;/a&gt; if you have any questions!&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2018-12-18:/changes/2018-12-18-interactions-preview/</id>
+    <title type="html">Preview the new Interactions API</title>
+    <published>2018-12-18T08:00:00Z</published>
+    <updated>2018-12-18T08:00:00Z</updated>
+    <link rel="alternate" href="https://developer.github.com/changes/2018-12-18-interactions-preview/"/>
+    <content type="html">&lt;p&gt;We're releasing new REST API v3 endpoints that allow you to manage &lt;a href="https://help.github.com/articles/limiting-interactions-in-your-repository/"&gt;repository&lt;/a&gt; and &lt;a href="https://help.github.com/articles/limiting-interactions-in-your-organization/"&gt;organization&lt;/a&gt; interaction limits.&lt;/p&gt;
+
+&lt;h4&gt;
+&lt;a id="new-endpoints" class="anchor" href="#new-endpoints" aria-hidden="true"&gt;&lt;span aria-hidden="true" class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;New endpoints&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="/v3/interactions/repos/#get-interaction-restrictions-for-a-repository"&gt;Get interaction restrictions for a repository&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/v3/interactions/repos/#add-or-update-interaction-restrictions-for-a-repository"&gt;Add or update interaction restrictions for a repository&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/v3/interactions/repos/#remove-interaction-restrictions-for-a-repository"&gt;Remove interaction restrictions for a repository&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/v3/interactions/orgs/#get-interaction-restrictions-for-an-organization"&gt;Get interaction restrictions for an organization&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/v3/interactions/orgs/#add-or-update-interaction-restrictions-for-an-organization"&gt;Add or update interaction restrictions for an organization&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/v3/interactions/orgs/#remove-interaction-restrictions-for-an-organization"&gt;Remove interaction restrictions for an organization&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;To access these new API endpoints during the preview period, you must provide a custom &lt;a href="/v3/media"&gt;media type&lt;/a&gt; in the &lt;code&gt;Accept&lt;/code&gt; header:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;application/vnd.github.sombra-preview+json
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;During the preview period, we may change aspects of these API endpoints based on developer feedback.
+If we do, we will announce the changes here on the developer blog, but we will not provide any advance notice.&lt;/p&gt;
+
+&lt;p&gt;If you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Interactions+API+Preview"&gt;let us know&lt;/a&gt;!&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2018-12-18:/changes/2018-12-18-content-attachments-api-time-limit/</id>
+    <title type="html">Creating Content Attachments Limited to 6 Hours</title>
+    <published>2018-12-18T08:00:00Z</published>
+    <updated>2018-12-18T08:00:00Z</updated>
+    <link rel="alternate" href="https://developer.github.com/changes/2018-12-18-content-attachments-api-time-limit/"/>
+    <content type="html">&lt;p&gt;In an effort to provide a predictable user experience, we are going to begin limiting the creation of content attachments to 6 hours from when the content reference URL was added.&lt;/p&gt;
+
+&lt;p&gt;If an application tries to create a content attachment for a content reference URL older than 6 hours, a response with HTTP status code &lt;code&gt;422&lt;/code&gt; will be returned.&lt;/p&gt;
+
+&lt;p&gt;Please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Creating%20Content%20Attachments%20Limited%20to%206%20Hours"&gt;contact us&lt;/a&gt; if you have any questions!&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2018-12-10:/changes/2018-12-10-content-attachments-api/</id>
+    <title type="html">Content Attachments API Public Beta</title>
+    <published>2018-12-10T08:00:00Z</published>
+    <updated>2018-12-10T08:00:00Z</updated>
+    <link rel="alternate" href="https://developer.github.com/changes/2018-12-10-content-attachments-api/"/>
+    <content type="html">&lt;p&gt;Developers share a lot of links on GitHub. Nearly one-third of comments on issues and pull requests include a link. Hidden behind each of those links is important context that can inform the conversation. Today weâ€™re excited to announce that you can curate and showcase content to help drive those conversations with the &lt;strong&gt;Content Attachments API&lt;/strong&gt;, which is now in public beta.&lt;/p&gt;
+
+&lt;p&gt;GitHub Apps now have the ability to listen for links in issues and pull requests and attach content to those links:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src="https://user-images.githubusercontent.com/7718702/49523156-188b3700-f8a1-11e8-8c08-9bfbdd9119b5.png" alt="demo screenshot"&gt;&lt;/p&gt;
+
+&lt;h1&gt;
+&lt;a id="setting-up-content-attachments" class="anchor" href="#setting-up-content-attachments" aria-hidden="true"&gt;&lt;span aria-hidden="true" class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;Setting up content attachments&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;Step 1.&lt;/strong&gt; &lt;a href="https://github.com/settings/apps/new"&gt;Create a GitHub App&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Register the domain that your app would like to create content attachments for (errors.ai in this case). Make sure to select &lt;strong&gt;Read &amp;amp; write&lt;/strong&gt; access:
+&lt;img src="https://user-images.githubusercontent.com/7718702/49523374-918a8e80-f8a1-11e8-959a-7c2e8d8b8cba.png" alt="content references permission"&gt;
+Make sure to select the &lt;strong&gt;Content reference&lt;/strong&gt; event:
+&lt;img src="https://user-images.githubusercontent.com/7718702/49523475-c696e100-f8a1-11e8-812a-edff499106d0.png" alt="content reference event"&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Step 2.&lt;/strong&gt; Install your newly created GitHub App on a repository.&lt;/p&gt;
+
+&lt;h1&gt;
+&lt;a id="api-interaction-flow" class="anchor" href="#api-interaction-flow" aria-hidden="true"&gt;&lt;span aria-hidden="true" class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;API interaction flow&lt;/h1&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Someone posts a link in an issue or pull request on a repository where your app is installed.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Your app will receive a &lt;code&gt;content_reference&lt;/code&gt; event with action &lt;code&gt;created&lt;/code&gt;. The contents of the &lt;code&gt;content_reference&lt;/code&gt; and &lt;code&gt;installation&lt;/code&gt; hash are important.&lt;/p&gt;
+
+&lt;pre class="highlight highlight-json"&gt;&lt;code&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="nt"&gt;"action"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"created"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="nt"&gt;"content_reference"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="nt"&gt;"id"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;1512&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="nt"&gt;"node_id"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"MDE2OkNvbnRlbnRSZWZlcmVuY2UxNTEy"&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="nt"&gt;"reference"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"https://errors.ai/my-project/A-1234"&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="nt"&gt;"repository"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="err"&gt;...&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="nt"&gt;"sender"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="err"&gt;...&lt;/span&gt;&lt;span class="p"&gt;},&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="nt"&gt;"installation"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="nt"&gt;"id"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;492164&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;&lt;span class="w"&gt;
+    &lt;/span&gt;&lt;span class="nt"&gt;"node_id"&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;"MDIzOkludGVncmF0aW9uSW5zdGFsbGF0aW9uNDkyMTY0"&lt;/span&gt;&lt;span class="w"&gt;
+  &lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="w"&gt;
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Using the &lt;code&gt;content_reference&lt;/code&gt; &lt;code&gt;id&lt;/code&gt; you can now create a content attachment using the API by supplying a &lt;code&gt;title&lt;/code&gt; and &lt;code&gt;body&lt;/code&gt; in the API call.  You'll also need the &lt;code&gt;installation&lt;/code&gt; &lt;code&gt;id&lt;/code&gt; to authenticate as a &lt;a href="/apps/building-github-apps/authenticating-with-github-apps/#authenticating-as-an-installation"&gt;GitHub App installation&lt;/a&gt;. You can use markdown in the &lt;code&gt;body&lt;/code&gt; parameter.&lt;/p&gt;
+
+&lt;pre class="highlight highlight-curl"&gt;&lt;code&gt;curl -X POST \
+  https://api.github.com/content_references/1512/attachments \
+  -H 'Accept: application/vnd.github.corsair-preview+json' \
+  -H 'Authorization: Bearer $INSTALLATION_TOKEN' \
+  -d '{
+    "title": "[A-1234] IntegrityError in core/models.py",
+    "body": "duplicate key violates unique constraint user_email_uniq\nDETAIL: Key (email)=(hubot@github.com) already exists..."
+}'
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;You'll see the new content attachment appear under the link in a pull request or issue comment on GitHub:&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src="https://user-images.githubusercontent.com/7718702/49371827-a4aa2c80-f6f0-11e8-8de2-ccca0941a245.png" alt="demo screenshot"&gt;&lt;/p&gt;
+
+&lt;h2&gt;
+&lt;a id="getting-started" class="anchor" href="#getting-started" aria-hidden="true"&gt;&lt;span aria-hidden="true" class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;Getting started&lt;/h2&gt;
+
+&lt;p&gt;Try out one of the apps already supporting content attachments or build your own:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://glitch.com/edit/#!/remix/github-content-attachments-api"&gt;Remix our Glitch blueprint&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="/apps/using-content-attachments/"&gt;Further documentation&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;
+&lt;a id="questions" class="anchor" href="#questions" aria-hidden="true"&gt;&lt;span aria-hidden="true" class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;Questions&lt;/h2&gt;
+
+&lt;h3&gt;
+&lt;a id="how-many-domains-can-an-app-register" class="anchor" href="#how-many-domains-can-an-app-register" aria-hidden="true"&gt;&lt;span aria-hidden="true" class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;How many domains can an app register?&lt;/h3&gt;
+
+&lt;p&gt;An app can register up to 5 domains, &lt;a href="/apps/using-content-attachments/#about-content-attachments"&gt;read more.&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3&gt;
+&lt;a id="what-kind-of-links-are-github-apps-notified-of" class="anchor" href="#what-kind-of-links-are-github-apps-notified-of" aria-hidden="true"&gt;&lt;span aria-hidden="true" class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;What kind of links are GitHub Apps notified of?&lt;/h3&gt;
+
+&lt;p&gt;For an app to receive a &lt;code&gt;content_reference&lt;/code&gt; event, the posted link must be "free standing", so it cannot be part of a markdown link.&lt;/p&gt;
+
+&lt;p&gt;If posted, this link will trigger the &lt;code&gt;content_reference&lt;/code&gt; event:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;https://example.com/test/url
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;However, this link will not:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[my favorite URL](https://example.com/test/url)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Also, remember, that for an app to receive the &lt;code&gt;content_reference&lt;/code&gt; event, it needs to be installed on the repository and have the matching domain registered. So in the above case the app would need to have &lt;code&gt;example.com&lt;/code&gt; registered as a content_reference in the app settings.&lt;/p&gt;
+
+&lt;p&gt;If you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Content+Attachments+API"&gt;let us know&lt;/a&gt;!&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2018-11-07:/changes/2018-11-07-strict-validation/</id>
+    <title type="html">Postponing stricter validation</title>
+    <published>2018-11-07T08:00:00Z</published>
+    <updated>2018-11-07T08:00:00Z</updated>
+    <link rel="alternate" href="https://developer.github.com/changes/2018-11-07-strict-validation/"/>
+    <content type="html">&lt;p&gt;Recently we &lt;a href="/changes/2018-09-25-stricter-validation-coming-soon-in-the-rest-api/"&gt;announced&lt;/a&gt; plans for stricter validation in our REST API and have been monitoring the effect these changes would have on integrators. After careful consideration, we've decided to not rollout stricter validation at this time.&lt;/p&gt;
+
+&lt;p&gt;The preview header introduced as part of this change will remain intact. You can continue to use stricter validation by passing the following header:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;application/vnd.github.speedy-preview+json
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We still believe that stricter validation would have a positive impact on our REST API overall and are looking for alternative ways to introduce it. Stay tuned for future updates.&lt;/p&gt;
+
+&lt;p&gt;If you have any questions, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Strict+validation+in+REST+API"&gt;reach out&lt;/a&gt;!&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2018-11-05:/changes/2018-11-05-github-services-brownout/</id>
+    <title type="html">GitHub Services Brownout Updates and Timeline</title>
+    <published>2018-11-05T08:00:00Z</published>
+    <updated>2018-11-05T08:00:00Z</updated>
+    <link rel="alternate" href="https://developer.github.com/changes/2018-11-05-github-services-brownout/"/>
+    <content type="html">&lt;p&gt;On October 1st, we &lt;a href="/changes/2018-10-01-denying-new-github-services"&gt;announced&lt;/a&gt; that we were going to do a week-long brownout of &lt;a href="https://github.com/github/github-services"&gt;GitHub Services&lt;/a&gt;-based webhooks this week. During this time no GitHub Services payloads would have been delivered. The motivation behind the brownout is to allow our users and integrators to see the places that GitHub Services are still being used and begin working towards migrating away from GitHub Services. After a lot of thought and discussion, we've decided that a week-long brownout at this time would be too disruptive for everyone. Instead, we are going to do a gradual increase in brownouts until the final &lt;em&gt;blackout&lt;/em&gt; date of &lt;strong&gt;January 31st, 2019&lt;/strong&gt; (please see our &lt;a href="/v3/guides/replacing-github-services/#deprecation-timeline"&gt;deprecation timeline&lt;/a&gt; for more information on that).&lt;/p&gt;
+
+&lt;p&gt;The following is the updated timeline for GitHub Services brownouts:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;
+&lt;strong&gt;November 7th, 2018&lt;/strong&gt;: We will suspend GitHub Services deliveries for a few hours throughout the day.&lt;/li&gt;
+&lt;li&gt;
+&lt;strong&gt;December 12th, 2018&lt;/strong&gt;: GitHub Service deliveries will be suspended for a full 24 hours&lt;/li&gt;
+&lt;li&gt;
+&lt;strong&gt;January 7th, 2019&lt;/strong&gt;: GitHub Services will be suspended for a full 7 days. Regular deliveries will resume &lt;strong&gt;January 14th, 2019&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;We will make sure to post a status on our &lt;a href="https://status.github.com/messages"&gt;status page&lt;/a&gt; at the start and end of each of these brownouts.&lt;/p&gt;
+
+&lt;div class="alert note"&gt;
+
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: If this change affects you, please see our guide to &lt;a href="/v3/guides/replacing-github-services/"&gt;Replacing GitHub Services&lt;/a&gt; with webhooks.&lt;/p&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;Please &lt;a href="https://github.com/contact?form%5Bsubject%5D=GitHub+Services+Brownout"&gt;contact us&lt;/a&gt; if you have any questions!&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2018-10-31:/changes/2018-10-31-improved-experience-for-marketplace-pending-changes/</id>
+    <title type="html">Improved Experience for Marketplace Pending Order Changes</title>
+    <published>2018-10-31T07:00:00Z</published>
+    <updated>2018-10-31T07:00:00Z</updated>
+    <link rel="alternate" href="https://developer.github.com/changes/2018-10-31-improved-experience-for-marketplace-pending-changes/"/>
+    <content type="html">&lt;p&gt;Today we are announcing updates to Marketplace-related webhooks and REST API's
+that will make handling orders with pending changes easier.&lt;/p&gt;
+
+&lt;h3&gt;
+&lt;a id="new-webhooks" class="anchor" href="#new-webhooks" aria-hidden="true"&gt;&lt;span aria-hidden="true" class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;New webhooks&lt;/h3&gt;
+
+&lt;p&gt;Integrators can now receive hooks when someone submits a plan change that won't be processed until the end of their billing cycle. Learn more
+&lt;a href="/v3/activity/events/types/#marketplacepurchaseevent"&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3&gt;
+&lt;a id="updated-apis" class="anchor" href="#updated-apis" aria-hidden="true"&gt;&lt;span aria-hidden="true" class="octicon octicon-link"&gt;&lt;/span&gt;&lt;/a&gt;Updated API's&lt;/h3&gt;
+
+&lt;p&gt;The same information can now also be fetched from the REST API.&lt;/p&gt;
+
+&lt;p&gt;Learn more about fetching details about a &lt;a href="/v3/apps/marketplace/#check-if-a-github-account-is-associated-with-any-marketplace-listing"&gt;single account&lt;/a&gt;
+or for fetching &lt;a href="/v3/apps/marketplace/#list-all-github-accounts-user-or-organization-on-a-specific-plan"&gt;all accounts&lt;/a&gt; on a given plan.&lt;/p&gt;
+
+&lt;p&gt;If you have any questions or feedback, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Marketplace+Pending+Order+Change+API+hooks"&gt;let us know&lt;/a&gt;!&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2018-10-25:/changes/2018-10-25-webhook-log-retention-limited-to-30-days/</id>
+    <title type="html">Webhook Log Retention Limited to 30 Days</title>
+    <published>2018-10-25T07:00:00Z</published>
+    <updated>2018-10-25T07:00:00Z</updated>
+    <link rel="alternate" href="https://developer.github.com/changes/2018-10-25-webhook-log-retention-limited-to-30-days/"/>
+    <content type="html">&lt;p&gt;In an effort to provide a more powerful and stable webhook log experience, we are going to begin limiting the webhook log retention to 30 days.&lt;/p&gt;
+
+&lt;p&gt;The webhook logs are viewable only from the organization or repository settings UI. We currently allow users to page through webhook logs until the they reach the first delivery for that hook regardless of how old the delivery is. However, as of &lt;strong&gt;Friday, November 2nd&lt;/strong&gt;, users will only be able to page back through 30 days of webhook delivery logs.&lt;/p&gt;
+
+&lt;div class="alert note"&gt;
+
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: This update does not affect GitHub Enterprise. The webhook log retention period on GitHub Enterprise will continue to be 8 days.&lt;/p&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;Please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Webhook+Log+Retention+Limited+30+Days"&gt;contact us&lt;/a&gt; if you have any questions!&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <id>tag:developer.github.com,2018-10-24:/changes/2018-10-24-more-complete-pulls-workflow-in-graphql/</id>
+    <title type="html">Preview more complete workflows for Pull Requests in GraphQL</title>
+    <published>2018-10-24T07:00:00Z</published>
+    <updated>2018-10-24T07:00:00Z</updated>
+    <link rel="alternate" href="https://developer.github.com/changes/2018-10-24-more-complete-pulls-workflow-in-graphql/"/>
+    <content type="html">&lt;p&gt;To go with our recent &lt;a href="/changes/2018-09-12-more-complete-issues-workflow-in-graphql/"&gt;issues preview&lt;/a&gt;, we're releasing a more
+exhaustive Pull Request API in GraphQL to enable you to &lt;a href="/v4/mutation/closepullrequest/"&gt;close&lt;/a&gt; or
+&lt;a href="/v4/mutation/mergepullrequest/"&gt;merge&lt;/a&gt; pull requests.&lt;/p&gt;
+
+&lt;p&gt;For a more complete list of new objects and mutations made available during this
+preview, please refer to the &lt;a href="/v4/previews/"&gt;GraphQL docs&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;To access this new API during the preview period, you must provide a custom
+&lt;a href="/v3/media"&gt;media type&lt;/a&gt; in the &lt;code&gt;Accept&lt;/code&gt; header:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  application/vnd.github.ocelot-preview
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;div class="alert note"&gt;
+
+&lt;p&gt;&lt;strong&gt;Note:&lt;/strong&gt; GraphQL APIs under preview cannot be accessed via the GraphQL Explorer at this time.&lt;/p&gt;
+
+&lt;/div&gt;
+
+&lt;p&gt;During the preview period, we may change aspects of these APIs based on
+developer feedback. If we do, we will announce the changes here on the developer
+blog, but we will not provide any advance notice.&lt;/p&gt;
+
+&lt;p&gt;If you have any questions or feedback of other interactions you might like for
+issues, please &lt;a href="https://github.com/contact?form%5Bsubject%5D=Pull+Requests+GraphQL+API"&gt;let us know&lt;/a&gt;!&lt;/p&gt;</content>
+  </entry>
+</feed>
+
+Comment
+Notifications for this thread
+You’re receiving notifications because you’re subscribed to this thread.
+
+Notifications
+Customize
+ Unsubscribe
+Desktop versionSign out
